@@ -8,6 +8,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+    TextEditingController usernameController = new TextEditingController();
+    TextEditingController emailController = new TextEditingController();
+    TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,58 +28,67 @@ class _SignUpState extends State<SignUp> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                            TextField(
-                                style: TextStyle(
-                                    color: Colors.white,
-                                ),
-                                decoration: InputDecoration(
-                                    hintText: "Username",
-                                    hintStyle: TextStyle(
-                                        color: Colors.white54,
+                            Form(
+                              child: Column(
+                                children: [
+                                    TextField(
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                        ),
+                                        decoration: InputDecoration(
+                                            hintText: "Username",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white54,
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                        ),
+                                        controller: usernameController,
                                     ),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                ),
-                            ),
 
-                            TextField(
-                                style: TextStyle(
-                                    color: Colors.white,
-                                ),
-                                decoration: InputDecoration(
-                                    hintText: "Email",
-                                    hintStyle: TextStyle(
-                                        color: Colors.white54,
+                                    TextField(
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                        ),
+                                        decoration: InputDecoration(
+                                            hintText: "Email",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white54,
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                        ),
+                                        controller: emailController,
                                     ),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                ),
-                            ),
 
-                            TextField(
-                                style: TextStyle(
-                                    color: Colors.white,
-                                ),
-                                decoration: InputDecoration(
-                                    hintText: "Password",
-                                    hintStyle: TextStyle(
-                                        color: Colors.white54,
+                                    TextField(
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                        ),
+                                        decoration: InputDecoration(
+                                            hintText: "Password",
+                                            hintStyle: TextStyle(
+                                                color: Colors.white54,
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                            enabledBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.white),
+                                            ),
+                                        ),
+                                        controller: passwordController,
                                     ),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.white),
-                                    ),
-                                ),
+                                ],
+                              ),
                             ),
 
                             SizedBox(height: 16),
