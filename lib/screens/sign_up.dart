@@ -1,3 +1,4 @@
+import '../services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,17 +12,23 @@ class _SignUpState extends State<SignUp> {
 
     bool isLoading = false;
 
+    Authentication auth = new Authentication();
+
     final formKey = GlobalKey<FormState>();
 
     TextEditingController usernameController = new TextEditingController();
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
 
-    void signUp(){
+    void signUpUser(){
 //        Validate the form fields
         if(formKey.currentState.validate()){
             setState(() {
               isLoading = true;
+            });
+
+            auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+                print(value);
             });
         }
     }
@@ -33,7 +40,13 @@ class _SignUpState extends State<SignUp> {
             backgroundColor: Colors.lightBlue,
             title: Text('Sign Up'),
         ),
-        body:  Container(
+        body: isLoading ? Container(
+            child: Center(
+                child: CircularProgressIndicator(
+
+                ),
+            ),
+        ) : Container(
             alignment: Alignment.bottomCenter,
             child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -132,7 +145,7 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(height: 16,),
 
                             GestureDetector(
-                                onTap: (){},
+                                onTap: (){ signUpUser(); },
                               child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                                   decoration: BoxDecoration(

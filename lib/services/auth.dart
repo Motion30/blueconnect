@@ -1,18 +1,18 @@
 //Import the firebase package
-import '../models/user.dart';
+import '../models/userModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication{
     final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    User _userFromFirebaseUser(FirebaseUser user){
-        return user != null ? User(userId: user.uid) : null;
+    UserModel _userFromFirebaseUser(User user){
+        return user != null ? UserModel(userId: user.uid) : null;
     }
 
     Future signInWithEmailAndPassword({String email, String password}) async{
         try{
-            AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-            FirebaseUser firebaseUser = result.user;
+            UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+            User firebaseUser = result.user;
             return _userFromFirebaseUser(firebaseUser);
         }catch(e){
             print(e.toString());
@@ -21,8 +21,8 @@ class Authentication{
 
     Future signUpWithEmailAndPassword({String email, String password }) async {
         try{
-            AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-            FirebaseUser firebaseUser = result.user;
+            UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+            User firebaseUser = result.user;
             return _userFromFirebaseUser(firebaseUser);
         }catch(e){
             print(e.toString());
