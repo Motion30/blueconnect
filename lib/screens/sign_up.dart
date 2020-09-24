@@ -1,3 +1,7 @@
+import 'package:blueconnectapp/screens/profile.dart';
+
+import '../screens/sign_in.dart';
+import '../utils/color.dart';
 import '../services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +32,7 @@ class _SignUpState extends State<SignUp> {
             });
 
             auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
-                print(value);
+                Navigator.of(context).pushReplacementNamed(Profile.screenId);
             });
         }
     }
@@ -37,7 +41,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: KAppbarColor,
             title: Text('Sign Up'),
         ),
         body: isLoading ? Container(
@@ -199,7 +203,9 @@ class _SignUpState extends State<SignUp> {
                                     ),
 
                                     GestureDetector(
-                                        onTap: (){},
+                                        onTap: (){
+                                            Navigator.of(context).pushReplacementNamed(SignIn.screenId);
+                                        },
                                       child: Text(
                                           "Login now",
                                           style: TextStyle(

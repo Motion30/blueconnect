@@ -1,3 +1,5 @@
+import '../screens/sign_up.dart';
+import '../utils/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: KAppbarColor,
             title: Text('Sign In'),
         ),
         body: Container(
@@ -121,13 +123,18 @@ class _SignInState extends State<SignIn> {
                                     ),
                                 ),
 
-                                Text(
-                                  "Register now",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      decoration: TextDecoration.underline,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                                GestureDetector(
+                                    onTap: (){
+                                        Navigator.of(context).pushReplacementNamed(SignUp.screenId);
+                                    },
+                                  child: Text(
+                                    "Register now",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        decoration: TextDecoration.underline,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                             ],
