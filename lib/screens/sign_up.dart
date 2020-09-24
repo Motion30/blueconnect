@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
               isLoading = true;
             });
 
-            auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+            auth.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
                 Navigator.of(context).pushReplacementNamed(Profile.screenId);
             });
         }
