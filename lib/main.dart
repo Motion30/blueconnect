@@ -1,9 +1,8 @@
-import 'package:blueconnectapp/screens/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'utils/color.dart';
 import 'package:flutter/material.dart';
 import 'screens/sign_in.dart';
+import 'screens/sign_up.dart';
+import 'utils/color.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
