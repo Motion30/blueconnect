@@ -1,9 +1,8 @@
 import 'forget_password.dart';
-import 'home.dart';
 import '../services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../providers/auth.dart';
+import '../providers/auth_data.dart';
 import 'package:provider/provider.dart';
 import 'sign_up.dart';
 import '../utils/color.dart';
@@ -17,9 +16,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
-    final Authentication _auth = new Authentication();
-
     bool isLoading = false;
 
     final formKey = GlobalKey<FormState>();
@@ -48,7 +44,11 @@ class _SignInState extends State<SignIn> {
 //            });
 
             try{
-                await Provider.of<Auth>(context, listen: false).signIn(email: emailController.text, password: passwordController.text);
+                await Provider.of<AuthData>(context, listen: false)
+                    .signIn(
+                        email: emailController.text,
+                        password: passwordController.text
+                    );
             }on HttpException catch(error){
                 var errorMessage = "Login Failed. Please try again later";
 

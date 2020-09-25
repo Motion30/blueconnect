@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import '../requests/auth.dart';
 import '../services/http_exception.dart';
 
-class Auth with ChangeNotifier {
+class AuthData with ChangeNotifier {
     String _token;
     String _userId;
     DateTime _expiryDate;
@@ -47,10 +47,8 @@ class Auth with ChangeNotifier {
             _userId = result['userId'];
 
             notifyListeners();
-           print('got here and the value of is auth is: \n');
-           print(isAuth);
+
         }catch(error){
-            print(error.toString());
             throw HttpException(message: error.toString());
         }
     }

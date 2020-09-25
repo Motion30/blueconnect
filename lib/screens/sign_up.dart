@@ -2,7 +2,7 @@ import '../services/http_exception.dart';
 import 'forget_password.dart';
 import 'profile.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth.dart';
+import '../providers/auth_data.dart';
 import '../screens/sign_in.dart';
 import '../utils/color.dart';
 import '../services/auth.dart';
@@ -49,7 +49,11 @@ class _SignUpState extends State<SignUp> {
 //            });
 
             try{
-                await Provider.of<Auth>(context, listen: false).signUp(email: emailController.text, password: passwordController.text);
+                await Provider.of<AuthData>(context, listen: false)
+                    .signUp(
+                        email: emailController.text,
+                        password: passwordController.text
+                    );
              } on HttpException catch(error) {
                 var errorMessage = "Registration Failed. Please try again later";
 

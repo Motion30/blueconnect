@@ -1,8 +1,8 @@
-import 'package:blueconnectapp/screens/channel.dart';
-import 'package:blueconnectapp/screens/community.dart';
-import 'package:blueconnectapp/screens/feeds.dart';
-import 'package:blueconnectapp/screens/chats.dart';
-import 'package:blueconnectapp/utils/color.dart';
+import 'channel.dart';
+import 'community.dart';
+import 'feeds.dart';
+import 'chats.dart';
+import '../utils/color.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

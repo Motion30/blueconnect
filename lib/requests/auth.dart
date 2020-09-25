@@ -58,9 +58,6 @@ class AuthRequest {
             result['userId'] = responseData['localId'];
             result['expiryDate'] = DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
 
-            print('The email is ${responseData['email']}');
-            print('The local id is ${responseData['localId']}');
-
             return result;
         }catch(error){
             print(error.toString());
