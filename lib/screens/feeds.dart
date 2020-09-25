@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Feeds extends StatelessWidget {
-    static const screenId = 'feeds_screen';
-
-    @override
-    Widget build(BuildContext context) {
-        return Container();
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Center(
+            child: Text("Feeds Screen"),
+        ),
+    );
+  }
 }

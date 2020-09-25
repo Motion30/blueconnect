@@ -1,3 +1,7 @@
+import 'package:blueconnectapp/screens/conversation.dart';
+import 'package:blueconnectapp/screens/forget_password.dart';
+import 'package:blueconnectapp/screens/home.dart';
+
 import 'screens/channel.dart';
 import 'screens/community.dart';
 import 'screens/feeds.dart';
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Diva Forum',
+      title: 'Blue Connect',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: Colors.blue,
@@ -33,9 +37,10 @@ class MyApp extends StatelessWidget {
         SignUp.screenId : (context) => SignUp(),
         Profile.screenId: (context) => Profile(),
         Channel.screenId: (context) => Channel(),
-        Feeds.screenId: (context) => Feeds(),
-        Community.screenId: (context) => Community(),
+        Home.screenId: (context) => Home(),
         Settings.screenId: (context) => Settings(),
+        ForgetPassword.screenId: (context) => ForgetPassword(),
+        Conversation.screenId: (context) => Conversation(),
       },
     );
   }

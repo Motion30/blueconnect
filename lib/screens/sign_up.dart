@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/screens/forget_password.dart';
 import 'package:blueconnectapp/screens/profile.dart';
 
 import '../screens/sign_in.dart';
@@ -46,9 +47,7 @@ class _SignUpState extends State<SignUp> {
         ),
         body: isLoading ? Container(
             child: Center(
-                child: CircularProgressIndicator(
-
-                ),
+                child: CircularProgressIndicator(),
             ),
         ) : Container(
             alignment: Alignment.bottomCenter,
@@ -136,7 +135,9 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(height: 16),
 
                             GestureDetector(
-                                onTap: (){},
+                                onTap: (){
+                                    Navigator.of(context).pushNamed(ForgetPassword.screenId);
+                                },
                                   child: Container(
                                       alignment: Alignment.centerRight,
                                       child: Container(
