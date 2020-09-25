@@ -27,6 +27,16 @@ class _SignInState extends State<SignIn> {
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
 
+    void _showErrorDialog(String message){
+        showDialog(context: context,builder: (ctx) => AlertDialog(
+            title: Text('An Error Occurred.'),
+            content: Text(message),
+            actions: <Widget>[
+                FlatButton(onPressed: (){ Navigator.of(context).pop(); }, child:  Text("Okay")),
+            ],
+        ));
+    }
+
     void signInUser() async{
         if(formKey.currentState.validate()){
             setState(() {
@@ -40,11 +50,24 @@ class _SignInState extends State<SignIn> {
             try{
                 await Provider.of<Auth>(context, listen: false).signIn(email: emailController.text, password: passwordController.text);
             }on HttpException catch(error){
+                var errorMessage = "Login Failed. Please try again later";
 
+                if(error.toString().contains('EMAIL_EXISTS')){
+                    errorMessage = 'Email already exists!';
+                }else if (error.toString().contains('WEAK_PASSWORD')){
+                    errorMessage = 'The password is too weak.';
+                }else if (error.toString().contains('EMAIL_NOT_FOUND') || error.toString().contains('INVALID_PASSWORD')){
+                    errorMessage = 'Invalid username or password.';
+                }
+                _showErrorDialog(errorMessage);
             }catch(error){
-
+                var errorMessage = "Login failed please try again!";
+                _showErrorDialog(errorMessage);
             }
 
+            setState(() {
+                isLoading = false;
+            });
 
         }
     }

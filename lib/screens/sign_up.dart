@@ -101,6 +101,7 @@ class _SignUpState extends State<SignUp> {
                                         style: TextStyle(
                                             color: Colors.white,
                                         ),
+                                        keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
                                             hintText: "Username",
                                             hintStyle: TextStyle(
@@ -123,6 +124,7 @@ class _SignUpState extends State<SignUp> {
                                         style: TextStyle(
                                             color: Colors.white,
                                         ),
+                                        keyboardType: TextInputType.emailAddress,
                                         decoration: InputDecoration(
                                             hintText: "Email",
                                             hintStyle: TextStyle(

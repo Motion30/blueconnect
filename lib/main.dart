@@ -28,15 +28,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: Auth())
       ],
-      child: MaterialApp(
+      child: Consumer<Auth>(builder: (ctx, authData,_) => MaterialApp(
         title: 'Blue Connect',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Colors.blue,
-            scaffoldBackgroundColor: KBackgroundColor,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryColor: Colors.blue,
+          scaffoldBackgroundColor: KBackgroundColor,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: SignUp(),
+
+        home: authData.isAuth ? Home() :  SignUp(),
 
         routes: {
           SignIn.screenId : (context) => SignIn(),
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
           ForgetPassword.screenId: (context) => ForgetPassword(),
           Conversation.screenId: (context) => Conversation(),
         },
-      ),
+      ) )
+      ,
     );
   }
 }

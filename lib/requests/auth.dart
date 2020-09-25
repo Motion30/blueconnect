@@ -7,7 +7,7 @@ class AuthRequest {
 
     /// Auth request for SignUp
     ///
-    static Future<void>  signUp({ String email, String password}) async{
+    static Future<Map<String, dynamic>>  signUp({ String email, String password}) async{
         try{
             const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$API_KEY';
             Response response = await post(url, body: jsonEncode({
@@ -21,6 +21,14 @@ class AuthRequest {
             if (responseData['error'] != null) {
                 throw  HttpException(message: responseData['error']['message']);
             }
+
+            final result = {};
+
+            result['idToken'] = responseData['idToken'];
+            result['userId'] = responseData['localId'];
+            result['expiryDate'] = DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
+
+            return result;
         }catch(error){
             throw error;
         }
@@ -28,7 +36,7 @@ class AuthRequest {
 
     /// Auth request for SignIn
     ///
-    static Future<void> signIn({ String email, String password }) async{
+    static Future<Map<String, dynamic>> signIn({ String email, String password }) async{
         try{
             const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$API_KEY';
             Response response = await post(url, body: jsonEncode({
@@ -42,6 +50,14 @@ class AuthRequest {
             if(responseData['error'] != null) {
                 throw HttpException(message: responseData['error']['message']);
             }
+
+            final result = {};
+
+            result['idToken'] = responseData['idToken'];
+            result['userId'] = responseData['localId'];
+            result['expiryDate'] = DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
+
+            return result;
         }catch(error){
             throw error;
         }
