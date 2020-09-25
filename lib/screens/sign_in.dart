@@ -3,7 +3,8 @@ import 'home.dart';
 import '../services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../providers/auth.dart';
+import 'package:provider/provider.dart';
 import 'sign_up.dart';
 import '../utils/color.dart';
 
@@ -25,15 +26,18 @@ class _SignInState extends State<SignIn> {
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
 
-    void signInUser(){
+    void signInUser() async{
         if(formKey.currentState.validate()){
             setState(() {
                 isLoading = true;
             });
 
-            _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
-                Navigator.of(context).pushReplacementNamed(Home.screenId);
-            });
+//            _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+//                Navigator.of(context).pushReplacementNamed(Home.screenId);
+//            });
+
+            await Provider.of<Auth>(context, listen: false).signIn(email: emailController.text, password: passwordController.text);
+
         }
     }
 

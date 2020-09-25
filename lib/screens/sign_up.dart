@@ -1,6 +1,7 @@
-import 'package:blueconnectapp/screens/forget_password.dart';
-import 'package:blueconnectapp/screens/profile.dart';
-
+import 'forget_password.dart';
+import 'profile.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth.dart';
 import '../screens/sign_in.dart';
 import '../utils/color.dart';
 import '../services/auth.dart';
@@ -25,16 +26,18 @@ class _SignUpState extends State<SignUp> {
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
 
-    void signUpUser(){
+    Future<void> signUpUser() async{
 //        Validate the form fields
         if(formKey.currentState.validate()){
             setState(() {
               isLoading = true;
             });
 
-            auth.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
-                Navigator.of(context).pushReplacementNamed(Profile.screenId);
-            });
+//            auth.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+//                Navigator.of(context).pushReplacementNamed(Profile.screenId);
+//            });
+
+            await Provider.of<Auth>(context, listen: false).signUp(email: emailController.text, password: passwordController.text);
         }
     }
 
