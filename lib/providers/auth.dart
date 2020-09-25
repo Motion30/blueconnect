@@ -1,5 +1,5 @@
-import 'package:blueconnectapp/services/http_exception.dart';
 import 'package:flutter/foundation.dart';
+import '../services/http_exception.dart';
 import '../requests/auth.dart';
 
 class Auth with ChangeNotifier {
@@ -7,22 +7,37 @@ class Auth with ChangeNotifier {
     DateTime _expiryDate;
     String _userId;
 
+    /// Sign user up
     Future<void> signUp ({ String email, String password }) async {
         try{
-            await AuthRequest.signUp(email: email, password: password);
+           Map<String,dynamic> result =  await AuthRequest.signUp(email: email, password: password);
+
+           _token = result['token'];
+           _userId = result['userId'];
+           _expiryDate = result['expiryDate'];
+
+           notifyListeners();
         }catch(error){
             throw HttpException(message: error.message);
         }
     }
 
+    /// Sign user in
     Future<void>  signIn ({ String email, String password }) async {
         try{
-            await AuthRequest.signIn(email: email, password: password);
+           Map<String, dynamic> result = await AuthRequest.signIn(email: email, password: password);
+
+            _token = result['token'];
+            _userId = result['userId'];
+            _expiryDate = result['expiryDate'];
+
+            notifyListeners();
         }catch(error){
             throw HttpException(message: error.message);
         }
     }
 
+    /// Check if the user is authenticated or not
     bool get isAuth {
         /// if we have a token and the token isn't expired then return true else return false
         return token != null;

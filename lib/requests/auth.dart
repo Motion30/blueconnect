@@ -1,6 +1,6 @@
+import 'package:http/http.dart';
 import 'dart:convert';
 import '../services/http_exception.dart';
-import 'package:http/http.dart';
 
 class AuthRequest {
     static const API_KEY = 'AIzaSyDIho20d4HEP8NfKrrmJZm9BURu3LCLrRs';
@@ -24,7 +24,7 @@ class AuthRequest {
 
             final result = {};
 
-            result['idToken'] = responseData['idToken'];
+            result['token'] = responseData['idToken'];
             result['userId'] = responseData['localId'];
             result['expiryDate'] = DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
 
@@ -53,7 +53,7 @@ class AuthRequest {
 
             final result = {};
 
-            result['idToken'] = responseData['idToken'];
+            result['token'] = responseData['idToken'];
             result['userId'] = responseData['localId'];
             result['expiryDate'] = DateTime.now().add(Duration(seconds: int.parse(responseData['expiresIn'])));
 
