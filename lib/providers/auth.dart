@@ -10,7 +10,7 @@ class Auth with ChangeNotifier {
     /// Sign user up
     Future<void> signUp ({ String email, String password }) async {
         try{
-           Map<String,dynamic> result =  await AuthRequest.signUp(email: email, password: password);
+           Map<dynamic,dynamic> result =  await AuthRequest.signUp(email: email, password: password);
 
            _token = result['token'];
            _userId = result['userId'];
@@ -25,15 +25,18 @@ class Auth with ChangeNotifier {
     /// Sign user in
     Future<void>  signIn ({ String email, String password }) async {
         try{
-           Map<String, dynamic> result = await AuthRequest.signIn(email: email, password: password);
+           Map<dynamic, dynamic> result = await AuthRequest.signIn(email: email, password: password);
 
             _token = result['token'];
             _userId = result['userId'];
             _expiryDate = result['expiryDate'];
 
             notifyListeners();
+           print('got here and the value of is auth is: \n');
+           print(isAuth);
         }catch(error){
-            throw HttpException(message: error.message);
+            print(error.toString());
+            throw HttpException(message: error.toString());
         }
     }
 
