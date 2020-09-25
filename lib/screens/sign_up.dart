@@ -1,3 +1,4 @@
+import '../services/http_exception.dart';
 import 'forget_password.dart';
 import 'profile.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,16 @@ class _SignUpState extends State<SignUp> {
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
 
+    void _showErrorDialog(String message){
+        showDialog(context: context,builder: (ctx) => AlertDialog(
+           title: Text('An Error Occurred.'),
+           content: Text(message),
+           actions: <Widget>[
+               FlatButton(onPressed: (){ Navigator.of(context).pop(); }, child:  Text("Okay")),
+           ],
+        ));
+    }
+
     Future<void> signUpUser() async{
 //        Validate the form fields
         if(formKey.currentState.validate()){
@@ -37,7 +48,28 @@ class _SignUpState extends State<SignUp> {
 //                Navigator.of(context).pushReplacementNamed(Profile.screenId);
 //            });
 
-            await Provider.of<Auth>(context, listen: false).signUp(email: emailController.text, password: passwordController.text);
+            try{
+                await Provider.of<Auth>(context, listen: false).signUp(email: emailController.text, password: passwordController.text);
+             } on HttpException catch(error) {
+                var errorMessage = "Registration Failed. Please try again later";
+
+                if(error.toString().contains('EMAIL_EXISTS')){
+                    errorMessage = 'Email already exists!';
+                }else if (error.toString().contains('WEAK_PASSWORD')){
+                    errorMessage = 'The password is too weak.';
+                }else if (error.toString().contains('EMAIL_NOT_FOUND') || error.toString().contains('INVALID_PASSWORD')){
+                    errorMessage = 'Invalid username or password.';
+                }
+
+                _showErrorDialog(errorMessage);
+            }catch(error) {
+                var errorMessage = "Registration failed please try again!";
+                _showErrorDialog(errorMessage);
+            }
+
+            setState(() {
+              isLoading = false;
+            });
         }
     }
 

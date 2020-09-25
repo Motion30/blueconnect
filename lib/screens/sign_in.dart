@@ -7,6 +7,7 @@ import '../providers/auth.dart';
 import 'package:provider/provider.dart';
 import 'sign_up.dart';
 import '../utils/color.dart';
+import '../services/http_exception.dart';
 
 class SignIn extends StatefulWidget {
     static const screenId = 'sign_in';
@@ -36,7 +37,14 @@ class _SignInState extends State<SignIn> {
 //                Navigator.of(context).pushReplacementNamed(Home.screenId);
 //            });
 
-            await Provider.of<Auth>(context, listen: false).signIn(email: emailController.text, password: passwordController.text);
+            try{
+                await Provider.of<Auth>(context, listen: false).signIn(email: emailController.text, password: passwordController.text);
+            }on HttpException catch(error){
+
+            }catch(error){
+
+            }
+
 
         }
     }
