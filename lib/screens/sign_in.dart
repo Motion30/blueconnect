@@ -164,9 +164,7 @@ class _SignInState extends State<SignIn> {
                                   borderRadius: BorderRadius.all(Radius.circular(50))
                               ),
                               child: GestureDetector(
-                                  onTap: (){
-                                        signInUser();
-                                  },
+                                  onTap: signInUser,
                                 child: Text(
                                     "Sign In",
                                     textAlign: TextAlign.center,
