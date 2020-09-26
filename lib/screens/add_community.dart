@@ -14,6 +14,7 @@ class _AddCommunityState extends State<AddCommunity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
             title: Text('Add new community'),
         ),
@@ -161,7 +162,7 @@ class _AddCommunityState extends State<AddCommunity> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                     Icon(
-                                        Icons.group_add,
+                                        Icons.people,
                                         color: Colors.white,
                                         size: 28,
                                     ),
@@ -169,7 +170,7 @@ class _AddCommunityState extends State<AddCommunity> {
                                     SizedBox(width: 20,),
 
                                     Text(
-                                        'Add Group',
+                                        'Add Community',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 18

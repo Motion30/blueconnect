@@ -47,7 +47,7 @@ class Select extends StatelessWidget {
                     GestureDetector(
                         onTap: () => Navigator.of(context).pushNamed(AddCommunity.screenId),
                       child: ListTile(
-                          leading: CircleAvatar(child: Icon(Icons.group_work),),
+                          leading: CircleAvatar(child: Icon(Icons.people),),
                           title: Text("Create new community"),
                       ),
                     ),
