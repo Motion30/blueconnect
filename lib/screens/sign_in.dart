@@ -1,5 +1,4 @@
 import 'forget_password.dart';
-import '../services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../providers/auth_data.dart';
@@ -33,15 +32,19 @@ class _SignInState extends State<SignIn> {
         ));
     }
 
+    @override
+    void dispose() {
+        // TODO: implement dispose
+        super.dispose();
+        emailController.dispose();
+        passwordController.dispose();
+    }
+
     void signInUser() async{
         if(formKey.currentState.validate()){
             setState(() {
                 isLoading = true;
             });
-
-//            _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
-//                Navigator.of(context).pushReplacementNamed(Home.screenId);
-//            });
 
             try{
                 await Provider.of<AuthData>(context, listen: false)

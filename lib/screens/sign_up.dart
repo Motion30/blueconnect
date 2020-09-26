@@ -1,11 +1,10 @@
+import 'package:blueconnectapp/screens/home.dart';
+import 'package:provider/provider.dart';
 import '../services/http_exception.dart';
 import 'forget_password.dart';
-import 'profile.dart';
-import 'package:provider/provider.dart';
 import '../providers/auth_data.dart';
 import '../screens/sign_in.dart';
 import '../utils/color.dart';
-import '../services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,8 +17,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
 
     bool isLoading = false;
-
-    Authentication auth = new Authentication();
 
     final formKey = GlobalKey<FormState>();
 
@@ -37,16 +34,21 @@ class _SignUpState extends State<SignUp> {
         ));
     }
 
-    Future<void> signUpUser() async{
+    @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+    void signUpUser() async{
 //        Validate the form fields
         if(formKey.currentState.validate()){
             setState(() {
               isLoading = true;
             });
-
-//            auth.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
-//                Navigator.of(context).pushReplacementNamed(Profile.screenId);
-//            });
 
             try{
                 await Provider.of<AuthData>(context, listen: false)
@@ -54,18 +56,22 @@ class _SignUpState extends State<SignUp> {
                         email: emailController.text,
                         password: passwordController.text
                     );
+
+//                manually push the user to the home page
+                Navigator.of(context).pushReplacementNamed(Home.screenId);
+
              } on HttpException catch(error) {
-                var errorMessage = "Registration Failed. Please try again later";
+                    var errorMessage = "Registration Failed. Please try again later";
 
-                if(error.toString().contains('EMAIL_EXISTS')){
-                    errorMessage = 'Email already exists!';
-                }else if (error.toString().contains('WEAK_PASSWORD')){
-                    errorMessage = 'The password is too weak.';
-                }else if (error.toString().contains('EMAIL_NOT_FOUND') || error.toString().contains('INVALID_PASSWORD')){
-                    errorMessage = 'Invalid username or password.';
-                }
+                    if(error.toString().contains('EMAIL_EXISTS')){
+                        errorMessage = 'Email already exists!';
+                    }else if (error.toString().contains('WEAK_PASSWORD')){
+                        errorMessage = 'The password is too weak.';
+                    }else if (error.toString().contains('EMAIL_NOT_FOUND') || error.toString().contains('INVALID_PASSWORD')){
+                        errorMessage = 'Invalid username or password.';
+                    }
 
-                _showErrorDialog(errorMessage);
+                    _showErrorDialog(errorMessage);
             }catch(error) {
                 var errorMessage = "Registration failed please try again!";
                 _showErrorDialog(errorMessage);
@@ -191,7 +197,7 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(height: 16,),
 
                             GestureDetector(
-                                onTap: (){ signUpUser(); },
+                                onTap: signUpUser,
                               child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                                   decoration: BoxDecoration(
@@ -260,6 +266,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                 ],
                             ),
+
                             SizedBox(height: 50,),
                         ],
                     ),

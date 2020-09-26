@@ -32,13 +32,15 @@ class AuthData with ChangeNotifier {
            _userId = result['userId'];
 
            notifyListeners();
+
         }catch(error){
+            print(error.toString());
             throw HttpException(message: error.message);
         }
     }
 
     /// Sign user in
-    Future<void>  signIn ({ String email, String password }) async {
+    Future<void> signIn ({ String email, String password }) async {
         try{
            Map<dynamic, dynamic> result = await AuthRequest.signIn(email: email, password: password);
 

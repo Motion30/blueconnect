@@ -10,6 +10,7 @@ class AuthRequest {
     static Future<Map<dynamic, dynamic>>  signUp({ String email, String password}) async{
         try{
             const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$API_KEY';
+
             Response response = await post(url, body: jsonEncode({
                 'email' : email,
                 'password' : password,
@@ -39,6 +40,7 @@ class AuthRequest {
     static Future<Map<dynamic, dynamic>> signIn({ String email, String password }) async{
         try{
             const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$API_KEY';
+
             Response response = await post(url, body: jsonEncode({
                 'email' : email,
                 'password' : password,
@@ -60,7 +62,6 @@ class AuthRequest {
 
             return result;
         }catch(error){
-            print(error.toString());
             throw error;
         }
     }
