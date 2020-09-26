@@ -1,3 +1,5 @@
+import 'package:blueconnectapp/screens/select.dart';
+
 import 'channel.dart';
 import 'community.dart';
 import 'feeds.dart';
@@ -70,7 +72,7 @@ class _FeedsState extends State<Home> with SingleTickerProviderStateMixin {
             ),
 
             floatingActionButton: FloatingActionButton(
-                onPressed: null,
+                onPressed: () => Navigator.of(context).pushNamed(Select.screenId),
                 backgroundColor: KAppbarColor,
                 child: Icon(
                     Icons.add,

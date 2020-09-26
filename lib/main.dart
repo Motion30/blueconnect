@@ -1,3 +1,7 @@
+import 'package:blueconnectapp/screens/add_community.dart';
+import 'package:blueconnectapp/screens/add_groups.dart';
+import 'package:blueconnectapp/screens/select.dart';
+
 import 'screens/conversation.dart';
 import 'screens/forget_password.dart';
 import 'screens/home.dart';
@@ -46,6 +50,9 @@ class MyApp extends StatelessWidget {
               Settings.screenId: (context) => Settings(),
               ForgetPassword.screenId: (context) => ForgetPassword(),
               Conversation.screenId: (context) => Conversation(),
+              Select.screenId: (context) => Select(),
+              AddGroup.screenId: (context) => AddGroup(),
+              AddCommunity.screenId: (context) => AddCommunity(),
             },
           )
        ),

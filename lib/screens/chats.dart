@@ -6,13 +6,11 @@ class Chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-            child: GestureDetector(
-                onTap: (){
-                    Navigator.of(context).pushNamed(Conversation.screenId);
-                },
-              child: Column(
-                children: [
-                  ListTile(
+            child: Column(
+              children: [
+                GestureDetector(
+                    onTap: () => Navigator.of(context).pushNamed(Conversation.screenId),
+                  child: ListTile(
                       leading: CircleAvatar(backgroundColor: Colors.black12,),
                       title: Text("Kenechi"),
                       subtitle: Text(
@@ -25,10 +23,10 @@ class Chat extends StatelessWidget {
                       ),
                       trailing: Text("March, 2021"),
                   ),
+                ),
 
-                 Divider(),
-                ],
-              ),
+               Divider(),
+              ],
             )
         ),
     );
