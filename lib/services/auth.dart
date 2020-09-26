@@ -1,6 +1,7 @@
 //Import the firebase package
 import '../models/userModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'http_exception.dart';
 
 class Authentication{
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,6 +17,7 @@ class Authentication{
             return _userFromFirebaseUser(firebaseUser);
         }catch(e){
             print(e.toString());
+            throw HttpException(message: e.toString());
         }
     }
 
@@ -26,6 +28,7 @@ class Authentication{
             return _userFromFirebaseUser(firebaseUser);
         }catch(e){
             print(e.toString());
+            throw HttpException(message: e.toString());
         }
     }
 
@@ -34,6 +37,7 @@ class Authentication{
             return await _auth.sendPasswordResetEmail(email: email);
         }catch(e){
             print(e.toString());
+            throw HttpException(message: e.toString());
         }
     }
 
@@ -42,6 +46,7 @@ class Authentication{
             return await _auth.signOut();
         }catch(e){
             print(e.toString());
+            throw HttpException(message: e.toString());
         }
     }
 }
