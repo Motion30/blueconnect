@@ -1,7 +1,10 @@
+import 'package:blueconnectapp/providers/user.dart';
+import 'package:blueconnectapp/screens/conversation.dart';
 import 'package:blueconnectapp/services/database.dart';
 import 'package:blueconnectapp/utils/color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Search extends StatefulWidget {
     static const screenId = 'search_screen';
@@ -30,6 +33,19 @@ class _SearchState extends State<Search> {
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  void createChatRoom(String username){
+        String myName = Provider.of<UserProvider>(context).username;
+        List<String> users = [username, myName];
+        String chatRoomId = getChatRoomId(username, myName);
+        Map<String, dynamic> chatRoomMap = {
+            'users' : users,
+            'chatRoomId' : chatRoomId,
+        };
+
+        _databaseMethods.initiateChatWithAUser(chatRoomId: chatRoomId, chatRoomMap: chatRoomMap);
+        Navigator.of(context).pushNamed(Conversation.screenId);
   }
 
 
@@ -76,7 +92,7 @@ class _SearchState extends State<Search> {
                     ),
                 ),
             ),
-            separatorBuilder: (context, int) => SizedBox(height: 10,),
+            separatorBuilder: (context, int) => SizedBox(height: 10, child: Divider(),),
             itemCount: searchResult.docs.length,
         ) : Container();
   }
@@ -129,5 +145,15 @@ class _SearchState extends State<Search> {
             ),
         ),
     );
+  }
+
+  String getChatRoomId(String a, String b){
+        String format = '';
+        if(a.substring(0,1).codeUnitAt(0) > b.substring(0,1).codeUnitAt(0)){
+            format = "$b\_$a";
+        }else{
+            format = "$a\_$b";
+        }
+        return format;
   }
 }

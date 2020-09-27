@@ -56,15 +56,6 @@ class _SignUpState extends State<SignUp> {
     void signUpUser(){
 //        Validate the form fields
         if(formKey.currentState.validate()){
-            Map<String, String> data = {
-                'username' : usernameController.text,
-                'email' : emailController.text,
-                'password' : passwordController.text,
-                'phone' : ' ',
-                'firstname' : ' ',
-                'lastname' : ' ',
-            };
-
             setState(() {
                 isLoading = true;
             });
@@ -72,6 +63,15 @@ class _SignUpState extends State<SignUp> {
             _authentication.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
                 print(value.toString());
                 if(value.userId != null){
+                    Map<String, String> data = {
+                        'username' : usernameController.text,
+                        'email' : emailController.text,
+                        'password' : passwordController.text,
+                        'phone' : ' ',
+                        'firstname' : ' ',
+                        'lastname' : ' ',
+                        "userId" : value.userId,
+                    };
                     _databaseMethods.uploadUserInfo(data, value.userId);
 
                     if(value != null) Provider.of<UserProvider>(context, listen: false).saveUserId(value.userId);

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseMethods {
     Future<QuerySnapshot> getUserByUsername(String username) async{
-        return await FirebaseFirestore.instance.collection("users").where('username', isEqualTo: username).get();
+        return await FirebaseFirestore.instance.collection("users").where('username', isGreaterThanOrEqualTo: username).get();
     }
 
     Future<QuerySnapshot> getUserByEmail(String email) async{
