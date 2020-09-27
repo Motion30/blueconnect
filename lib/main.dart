@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/providers/user.dart';
 import 'package:blueconnectapp/screens/add_community.dart';
 import 'package:blueconnectapp/screens/add_groups.dart';
 import 'package:blueconnectapp/screens/authenticate.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => AuthData(),),
+        ChangeNotifierProvider(create: (ctx) => UserProvider(),),
       ],
       child: MaterialApp(
             title: 'Blue Connect',

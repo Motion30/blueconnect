@@ -1,4 +1,8 @@
+import 'package:blueconnectapp/providers/user.dart';
+import 'package:blueconnectapp/services/database.dart';
+import 'package:blueconnectapp/utils/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
 import '../utils/color.dart';
@@ -23,6 +27,8 @@ class _SignUpState extends State<SignUp> {
     final formKey = GlobalKey<FormState>();
 
     Authentication _authentication = new Authentication();
+
+    DatabaseMethods _databaseMethods = new DatabaseMethods();
 
     TextEditingController usernameController = new TextEditingController();
     TextEditingController emailController = new TextEditingController();
@@ -50,6 +56,14 @@ class _SignUpState extends State<SignUp> {
     void signUpUser(){
 //        Validate the form fields
         if(formKey.currentState.validate()){
+            Map<String, String> data = {
+                'username' : usernameController.text,
+                'email' : emailController.text,
+                'password' : passwordController.text,
+                'phone' : ' ',
+                'firstname' : ' ',
+                'lastname' : ' ',
+            };
 
             setState(() {
                 isLoading = true;
@@ -57,6 +71,15 @@ class _SignUpState extends State<SignUp> {
 
             _authentication.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
                 if(value.userId != null){
+
+                    if(value != null) Provider.of<UserProvider>(context).saveUserId(value.userId);
+                    Helper.saveUserLoggedInSharedPreference(true);
+                    Helper.saveUserEmailSharedPreference(emailController.text);
+                    Provider.of<UserProvider>(context).saveUserEmail(emailController.text);
+                    Provider.of<UserProvider>(context).saveUserName(usernameController.text);
+                    Provider.of<UserProvider>(context).setLoggedInStatus(true);
+
+                    _databaseMethods.uploadUserInfo(data, value.userId);
                     Navigator.of(context).pushReplacementNamed(Home.screenId);
                 }else {
                     var errorMessage = 'Email already exists.';

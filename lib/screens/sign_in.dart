@@ -1,7 +1,12 @@
 import 'package:blueconnectapp/screens/home.dart';
 import 'package:blueconnectapp/services/auth.dart';
+import 'package:blueconnectapp/services/database.dart';
+import 'package:blueconnectapp/utils/helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user.dart';
 
 import '../utils/color.dart';
 import 'forget_password.dart';
@@ -23,6 +28,7 @@ class _SignInState extends State<SignIn> {
     final formKey = GlobalKey<FormState>();
 
     final Authentication _auth = new Authentication();
+    final DatabaseMethods _databaseMethods = new DatabaseMethods();
 
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
@@ -51,8 +57,18 @@ class _SignInState extends State<SignIn> {
                 isLoading = true;
             });
 
+            _databaseMethods.getUserByEmail(emailController.text).then((value){
+                QuerySnapshot snapshot = value;
+                Helper.saveUserEmailSharedPreference(snapshot.docs[0].get("email"));
+                Provider.of<UserProvider>(context).saveUserEmail(snapshot.docs[0].get("email"));
+                Provider.of<UserProvider>(context).saveUserName(snapshot.docs[0].get("username"));
+            });
+
             _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
                 if(value.userId != null){
+                    if(value != null) Provider.of<UserProvider>(context).saveUserId(value.userId);
+                    Helper.saveUserLoggedInSharedPreference(true);
+                    Provider.of<UserProvider>(context).setLoggedInStatus(true);
                     Navigator.of(context).pushReplacementNamed(Home.screenId);
                 }else {
                     var errorMessage = 'Invalid username or password';
