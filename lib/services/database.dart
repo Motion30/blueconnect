@@ -5,7 +5,7 @@ class DatabaseMethods {
 
     }
 
-    uploadUserInfo(String username, String email){
-        
+    uploadUserInfo(Map<String, String> data){
+        FirebaseFirestore.instance.collection("users").add(data);
     }
 }

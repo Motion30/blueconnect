@@ -1,14 +1,17 @@
-import 'forget_password.dart';
+import 'package:blueconnectapp/screens/home.dart';
+import 'package:blueconnectapp/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../providers/auth_data.dart';
-import 'package:provider/provider.dart';
-import 'sign_up.dart';
+
 import '../utils/color.dart';
-import '../services/http_exception.dart';
+import 'forget_password.dart';
 
 class SignIn extends StatefulWidget {
     static const screenId = 'sign_in';
+
+    final Function toggle;
+
+    SignIn({ this.toggle });
 
   @override
   _SignInState createState() => _SignInState();
@@ -18,6 +21,8 @@ class _SignInState extends State<SignIn> {
     bool isLoading = false;
 
     final formKey = GlobalKey<FormState>();
+
+    final Authentication _auth = new Authentication();
 
     TextEditingController emailController = new TextEditingController();
     TextEditingController passwordController = new TextEditingController();
@@ -46,30 +51,24 @@ class _SignInState extends State<SignIn> {
                 isLoading = true;
             });
 
-            try{
-                await Provider.of<AuthData>(context, listen: false)
-                    .signIn(
-                        email: emailController.text,
-                        password: passwordController.text
-                    );
-            }on HttpException catch(error){
-                var errorMessage = "Login Failed. Please try again later";
+            _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+                if(value.userId != null){
+                    Navigator.of(context).pushReplacementNamed(Home.screenId);
+                }else {
+                    var errorMessage = 'Invalid username or password';
+                    _showErrorDialog(errorMessage);
 
-                if(error.toString().contains('EMAIL_EXISTS')){
-                    errorMessage = 'Email already exists!';
-                }else if (error.toString().contains('WEAK_PASSWORD')){
-                    errorMessage = 'The password is too weak.';
-                }else if (error.toString().contains('EMAIL_NOT_FOUND') || error.toString().contains('INVALID_PASSWORD')){
-                    errorMessage = 'Invalid username or password.';
+                    setState(() {
+                        isLoading = false;
+                    });
                 }
+            }).catchError((error){
+                var errorMessage = 'Invalid username or password';
                 _showErrorDialog(errorMessage);
-            }catch(error){
-                var errorMessage = "Login failed please try again!";
-                _showErrorDialog(errorMessage);
-            }
 
-            setState(() {
-                isLoading = false;
+                setState(() {
+                    isLoading = false;
+                });
             });
 
         }
@@ -213,15 +212,19 @@ class _SignInState extends State<SignIn> {
 
                                   GestureDetector(
                                       onTap: (){
-                                          Navigator.of(context).pushReplacementNamed(SignUp.screenId);
+//                                          Navigator.of(context).pushReplacementNamed(SignUp.screenId);
+                                        widget.toggle();
                                       },
-                                    child: Text(
-                                      "Register now",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      child: Text(
+                                        "Register now",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            decoration: TextDecoration.underline,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                   ),

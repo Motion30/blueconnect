@@ -1,5 +1,7 @@
 import 'package:blueconnectapp/screens/add_community.dart';
 import 'package:blueconnectapp/screens/add_groups.dart';
+import 'package:blueconnectapp/screens/authenticate.dart';
+import 'package:blueconnectapp/screens/search.dart';
 import 'package:blueconnectapp/screens/select.dart';
 
 import 'screens/conversation.dart';
@@ -29,8 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => AuthData(),),
       ],
-      child: Consumer<AuthData>(
-          builder: (ctx, authData , _) => MaterialApp(
+      child: MaterialApp(
             title: 'Blue Connect',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -39,9 +40,10 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
 
-            home: authData.isAuth ?  Home() :  SignIn(),
+            home: Authenticate(),
 
             routes: {
+              Authenticate.screenId : (context) => Authenticate(),
               SignIn.screenId : (context) => SignIn(),
               Home.screenId: (context) => Home(),
               SignUp.screenId : (context) => SignUp(),
@@ -53,9 +55,9 @@ class MyApp extends StatelessWidget {
               Select.screenId: (context) => Select(),
               AddGroup.screenId: (context) => AddGroup(),
               AddCommunity.screenId: (context) => AddCommunity(),
+                Search.screenId : (context) => Search(),
             },
           )
-       ),
     );
   }
 }

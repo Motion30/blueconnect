@@ -1,12 +1,16 @@
-import 'home.dart';
-import '../services/auth.dart';
-import 'forget_password.dart';
-import '../screens/sign_in.dart';
-import '../utils/color.dart';
 import 'package:flutter/material.dart';
+
+import '../services/auth.dart';
+import '../utils/color.dart';
+import 'forget_password.dart';
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
     static const screenId = 'sign_up';
+
+    final Function toggle;
+
+    SignUp({ this.toggle });
 
   @override
   _SignUpState createState() => _SignUpState();
@@ -48,32 +52,27 @@ class _SignUpState extends State<SignUp> {
         if(formKey.currentState.validate()){
 
             setState(() {
-              isLoading = true;
+                isLoading = true;
             });
 
-            _authentication.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((e){
-                print(e.userId);
-
-                if(e.userId == null){
-                    var errorMessage = e.message;
-
-                    _showErrorDialog(errorMessage);
-                }
-
-                if(e.userId != null){
+            _authentication.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+                if(value.userId != null){
                     Navigator.of(context).pushReplacementNamed(Home.screenId);
+                }else {
+                    var errorMessage = 'Email already exists.';
+                    _showErrorDialog(errorMessage);
+
+                    setState(() {
+                        isLoading = false;
+                    });
                 }
-
             }).catchError((error){
-
-                var errorMessage = error.message;
-
+                var errorMessage = 'Email already exists.';
                 _showErrorDialog(errorMessage);
 
-            });
-
-            setState(() {
-              isLoading = false;
+                setState(() {
+                    isLoading = false;
+                });
             });
         }
     }
@@ -192,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(height: 16,),
 
                             GestureDetector(
-                                onTap: (){signUpUser();},
+                                onTap: signUpUser,
                               child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                                   decoration: BoxDecoration(
@@ -247,16 +246,20 @@ class _SignUpState extends State<SignUp> {
 
                                     GestureDetector(
                                         onTap: (){
-                                            Navigator.of(context).pushReplacementNamed(SignIn.screenId);
+//                                            Navigator.of(context).pushReplacementNamed(SignIn.screenId);
+                                            widget.toggle();
                                         },
-                                      child: Text(
-                                          "Login now",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              decoration: TextDecoration.underline,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                          ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10),
+                                        child: Text(
+                                            "Login now",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                decoration: TextDecoration.underline,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                            ),
+                                        ),
                                       ),
                                     ),
                                 ],
