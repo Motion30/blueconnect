@@ -18,6 +18,8 @@ class _SearchState extends State<Search> {
     final TextEditingController _controller = new TextEditingController();
     final DatabaseMethods _databaseMethods = new DatabaseMethods();
 
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+
     bool isLoading = false;
 
     QuerySnapshot searchResult;
@@ -36,16 +38,24 @@ class _SearchState extends State<Search> {
   }
 
   void createChatRoom(String username){
-        String myName = Provider.of<UserProvider>(context).username;
-        List<String> users = [username, myName];
-        String chatRoomId = getChatRoomId(username, myName);
-        Map<String, dynamic> chatRoomMap = {
-            'users' : users,
-            'chatRoomId' : chatRoomId,
-        };
+      String myName = Provider.of<UserProvider>(context, listen: false).username;
+        if(username != myName ){
+            List<String> users = [username, myName];
+            String chatRoomId = getChatRoomId(username, myName);
+            Map<String, dynamic> chatRoomMap = {
+                'users' : users,
+                'chatRoomId' : chatRoomId,
+            };
 
-        _databaseMethods.initiateChatWithAUser(chatRoomId: chatRoomId, chatRoomMap: chatRoomMap);
-        Navigator.of(context).pushNamed(Conversation.screenId);
+            _databaseMethods.initiateChatWithAUser(chatRoomId: chatRoomId, chatRoomMap: chatRoomMap);
+            Navigator.of(context).pushReplacementNamed(Conversation.screenId);
+            Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) => Conversation(username: username, picUrl: '', chatRoomId: chatRoomId, sender: myName, ),
+            ));
+        }else{
+            _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('You can not send a message to yourself.')));
+        }
+
   }
 
 
@@ -54,12 +64,20 @@ class _SearchState extends State<Search> {
           isLoading = true;
         });
 
-     _databaseMethods.getUserByUsername(_controller.text).then((value) {
-         setState(() {
-             isLoading = false;
-             searchResult = value;
-         });
-     } );
+        if(_controller.text.isNotEmpty){
+            _databaseMethods.getUserByUsername(_controller.text).then((value) {
+                setState(() {
+                    isLoading = false;
+                    searchResult = value;
+                });
+            } );
+        }else{
+            setState(() {
+                isLoading = false;
+            });
+
+            _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Enter a search query.')));
+        }
   }
 
   Widget searchList(){
@@ -84,11 +102,14 @@ class _SearchState extends State<Search> {
                         color: KAppbarColor,
                         borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Text(
-                        "Message",
-                        style: TextStyle(
-                            color: Colors.white
-                        ),
+                    child: GestureDetector(
+                        onTap: () => createChatRoom("${searchResult.docs[index].get("username")}"),
+                      child: Text(
+                          "Message",
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                      ),
                     ),
                 ),
             ),
@@ -100,6 +121,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
             backgroundColor: KAppbarColor,
             title: Text("Blue connect"),

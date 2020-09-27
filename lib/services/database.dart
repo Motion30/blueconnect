@@ -15,11 +15,16 @@ class DatabaseMethods {
         });
     }
 
-    void initiateChatWithAUser({ String chatRoomId, Map<String, String> chatRoomMap }){
+    void initiateChatWithAUser({ String chatRoomId, Map<String, dynamic> chatRoomMap }){
         FirebaseFirestore.instance.collection("chatMaps").doc(chatRoomId).set(chatRoomMap).catchError((e){
             print(e.toString());
         });
+    }
 
+    Future<void> getPersonalConversations(String chatRoomId, Map<String, String> data){
+        return FirebaseFirestore.instance.collection('chatMaps').doc(chatRoomId).collection("chats").add(data).catchError((error){
+            print(error.toString());
+        });
     }
 
 
