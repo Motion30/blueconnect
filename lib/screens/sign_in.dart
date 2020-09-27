@@ -60,15 +60,15 @@ class _SignInState extends State<SignIn> {
             _databaseMethods.getUserByEmail(emailController.text).then((value){
                 QuerySnapshot snapshot = value;
                 Helper.saveUserEmailSharedPreference(snapshot.docs[0].get("email"));
-                Provider.of<UserProvider>(context).saveUserEmail(snapshot.docs[0].get("email"));
-                Provider.of<UserProvider>(context).saveUserName(snapshot.docs[0].get("username"));
+                Provider.of<UserProvider>(context, listen: false).saveUserEmail(snapshot.docs[0].get("email"));
+                Provider.of<UserProvider>(context, listen: false).saveUserName(snapshot.docs[0].get("username"));
             });
 
             _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
                 if(value.userId != null){
-                    if(value != null) Provider.of<UserProvider>(context).saveUserId(value.userId);
+                    if(value != null) Provider.of<UserProvider>(context, listen: false).saveUserId(value.userId);
+                    Provider.of<UserProvider>(context, listen: false).setLoggedInStatus(true);
                     Helper.saveUserLoggedInSharedPreference(true);
-                    Provider.of<UserProvider>(context).setLoggedInStatus(true);
                     Navigator.of(context).pushReplacementNamed(Home.screenId);
                 }else {
                     var errorMessage = 'Invalid username or password';

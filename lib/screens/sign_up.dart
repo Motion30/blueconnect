@@ -70,16 +70,17 @@ class _SignUpState extends State<SignUp> {
             });
 
             _authentication.signUpWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value){
+                print(value.toString());
                 if(value.userId != null){
+                    _databaseMethods.uploadUserInfo(data, value.userId);
 
-                    if(value != null) Provider.of<UserProvider>(context).saveUserId(value.userId);
+                    if(value != null) Provider.of<UserProvider>(context, listen: false).saveUserId(value.userId);
                     Helper.saveUserLoggedInSharedPreference(true);
                     Helper.saveUserEmailSharedPreference(emailController.text);
-                    Provider.of<UserProvider>(context).saveUserEmail(emailController.text);
-                    Provider.of<UserProvider>(context).saveUserName(usernameController.text);
-                    Provider.of<UserProvider>(context).setLoggedInStatus(true);
+                    Provider.of<UserProvider>(context, listen: false).saveUserEmail(emailController.text);
+                    Provider.of<UserProvider>(context, listen: false).saveUserName(usernameController.text);
+                    Provider.of<UserProvider>(context, listen: false).setLoggedInStatus(true);
 
-                    _databaseMethods.uploadUserInfo(data, value.userId);
                     Navigator.of(context).pushReplacementNamed(Home.screenId);
                 }else {
                     var errorMessage = 'Email already exists.';
