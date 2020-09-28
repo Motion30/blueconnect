@@ -21,10 +21,14 @@ class DatabaseMethods {
         });
     }
 
-    Future<void> getPersonalConversations(String chatRoomId, Map<String, String> data){
+    Future<void> addPersonalConversations(String chatRoomId, Map<String, dynamic> data){
         return FirebaseFirestore.instance.collection('chatMaps').doc(chatRoomId).collection("chats").add(data).catchError((error){
             print(error.toString());
         });
+    }
+
+     Stream<QuerySnapshot> getPersonalConversations(String chatRoomId) {
+        return FirebaseFirestore.instance.collection("chatMaps").doc(chatRoomId).collection("chats").orderBy("time", descending: false).snapshots();
     }
 
 
