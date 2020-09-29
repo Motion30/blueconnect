@@ -31,5 +31,13 @@ class DatabaseMethods {
         return FirebaseFirestore.instance.collection("chatMaps").doc(chatRoomId).collection("chats").orderBy("time", descending: false).snapshots();
     }
 
+    Future<QuerySnapshot>  getLastConversation(String chatRoomId){
+        return FirebaseFirestore.instance.collection("chatMaps").doc(chatRoomId).collection("chats").orderBy("time", descending: false).get();
+    }
+
+    Stream<QuerySnapshot> getChatRooms(String username) {
+        return FirebaseFirestore.instance.collection("chatMaps").where('users',arrayContains: username).snapshots();
+    }
+
 
 }
