@@ -1,4 +1,7 @@
+import 'package:blueconnectapp/screens/authenticate.dart';
+import 'package:blueconnectapp/screens/search.dart';
 import 'package:blueconnectapp/screens/select.dart';
+import 'package:blueconnectapp/services/auth.dart';
 
 import 'channel.dart';
 import 'community.dart';
@@ -16,6 +19,8 @@ class Home extends StatefulWidget {
 
 class _FeedsState extends State<Home> with SingleTickerProviderStateMixin {
     TabController _tabController;
+
+    final Authentication _auth = new Authentication();
 
     @override
     void initState() {
@@ -45,18 +50,28 @@ class _FeedsState extends State<Home> with SingleTickerProviderStateMixin {
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: IconButton(
-                            onPressed: (){
-                            },
+                            onPressed: () => Navigator.of(context).pushNamed(Search.screenId),
                             icon: Icon(Icons.search),
                         ),
                     ),
 
                     Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon: Icon(Icons.more_vert),
-                        ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: PopupMenuButton(
+                          icon: Icon(Icons.more_vert),
+                          itemBuilder: (context) => [
+                              PopupMenuItem(child: Text('Profile')),
+                              PopupMenuItem(child: Text('Settings')),
+                              PopupMenuItem(child: GestureDetector(
+                                  onTap: (){
+                                      _auth.signOut();
+                                      Navigator.of(context).pushReplacementNamed(Authenticate.screenId);
+                                  },
+                                  child: Text('Sign Out')
+                                )
+                              ),
+                          ],
+                      ),
                     ),
                 ],
             ),

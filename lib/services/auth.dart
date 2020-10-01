@@ -1,4 +1,7 @@
 //Import the firebase package
+import 'package:blueconnectapp/providers/user.dart';
+import 'package:provider/provider.dart';
+
 import '../models/userModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'http_exception.dart';
@@ -49,4 +52,6 @@ class Authentication{
             throw HttpException(message: e.toString());
         }
     }
+
+
 }
