@@ -1,7 +1,6 @@
-import 'package:blueconnectapp/screens/add_community.dart';
-import 'package:blueconnectapp/screens/add_groups.dart';
-import 'package:blueconnectapp/screens/select.dart';
-
+import 'screens/add_community.dart';
+import 'screens/add_groups.dart';
+import 'screens/select.dart';
 import 'screens/conversation.dart';
 import 'screens/forget_password.dart';
 import 'screens/home.dart';
