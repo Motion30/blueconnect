@@ -9,10 +9,8 @@ class DatabaseMethods {
         return await FirebaseFirestore.instance.collection("users").where('email', isEqualTo: email).get();
     }
 
-    void uploadUserInfo(Map<String, String> data, String userId){
-        FirebaseFirestore.instance.collection("users").doc(userId).set(data).catchError((e){
-            print(e.toString());
-        });
+    Future<void> uploadUserInfo(Map<String, String> data, String userId) async{
+        FirebaseFirestore.instance.collection("users").doc(userId).set(data);
     }
 
     void initiateChatWithAUser({ String chatRoomId, Map<String, dynamic> chatRoomMap }){
