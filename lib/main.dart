@@ -1,3 +1,4 @@
+import 'ui/shared/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() async{
@@ -14,10 +15,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primaryColor: Colors.blue,
-              scaffoldBackgroundColor: KBackgroundColor,
+              scaffoldBackgroundColor: KPrimaryWhite,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: Authenticate(),
+            initialRoute: '/',
     );
   }
 }
