@@ -1,4 +1,5 @@
 import 'package:blueconnectapp/core/managers/dialog_manager.dart';
+import 'package:blueconnectapp/core/services/navigator_service.dart';
 
 import 'ui/shared/colors.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
                 )
               ),
             ),
+            navigatorKey: locator<NavigationService>().navigatorKey,
             title: 'Blue Connect',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
