@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:blueconnectapp/core/dataModels/alerts/alert_request.dart';
