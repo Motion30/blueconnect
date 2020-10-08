@@ -1,3 +1,5 @@
+import 'package:blueconnectapp/core/managers/dialog_manager.dart';
+
 import 'ui/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'locator.dart';
@@ -14,6 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+            builder: (context, widget) => Navigator(
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => DialogManager(
+                  child: widget,
+                )
+              ),
+            ),
             title: 'Blue Connect',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
