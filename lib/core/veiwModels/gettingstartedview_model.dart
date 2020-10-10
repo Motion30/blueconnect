@@ -8,10 +8,10 @@ class GettingStartedViewModel extends BaseModel{
   NavigationService _navigationService = locator<NavigationService>();
 
   void navigateToLogin(){
-    _navigationService.navigateTo(Routes.LOGIN_SCREEN);
+    _navigationService.navigatorKey.currentState.pushReplacementNamed(Routes.LOGIN_SCREEN);
   }
 
   void navigateToSignIn(){
-    _navigationService.navigateTo(Routes.REGISTER_SCREEN);
+    _navigationService.navigatorKey.currentState.pushReplacementNamed(Routes.REGISTER_SCREEN);
   }
 }
