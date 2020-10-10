@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/core/constants/route_paths.dart';
 import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/dialog_service.dart';
@@ -25,5 +26,9 @@ class SignUpViewModel extends BaseModel{
     }else{
 
     }
+  }
+
+  void navigateToLogin(){
+    _navigationService.navigatorKey.currentState.pushNamed(Routes.LOGIN_SCREEN);
   }
 }
