@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:blueconnectapp/core/constants/route_paths.dart';
 // Set up router for the project
 
 class Router {
