@@ -13,6 +13,7 @@ class AppUser{
         email = data['email'],
         phone = data['phone'];
 
+   // Transform data to json
    Map<String, dynamic>  toJson(){
      return {
        "id": id,
