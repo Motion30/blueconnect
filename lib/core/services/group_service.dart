@@ -1,8 +1,14 @@
+import 'dart:async';
 import 'package:blueconnectapp/core/models/group.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class GroupService {
+
   final CollectionReference _groupCollection = FirebaseFirestore.instance.collection("groups");
+
+  // Create a stream controller that would broadcast our groups
+  final StreamController<List<Group>> _groupController = StreamController<List<Group>>.broadcast();
 
   // Create Group
   Future createGroup(Group group) async{
@@ -36,6 +42,26 @@ class GroupService {
   Future deleteGroup ({ String groupId }) async {
     try{
       await _groupCollection.doc(groupId).delete();
+    }catch(e){
+      return e.message;
+    }
+  }
+
+  //   Get all groups [STREAM]
+  Future getGroups() async {
+    try{
+      // Request for the snapshots
+      _groupCollection.snapshots().listen((groupSnapshots) {
+        //Check if it has data
+        if(groupSnapshots.docs.isNotEmpty){
+          var groups = groupSnapshots.docs.map((snapshot) => Group.fromMap(snapshot.data())).toList();
+
+          _groupController.add(groups);
+        }
+      });
+
+      // Return the stream underlying our _groupController
+      return _groupController.stream;
     }catch(e){
       return e.message;
     }

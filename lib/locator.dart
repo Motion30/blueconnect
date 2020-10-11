@@ -1,5 +1,6 @@
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/dialog_service.dart';
+import 'package:blueconnectapp/core/services/group_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/core/services/news_service.dart';
 import 'package:blueconnectapp/core/services/user_service.dart';
@@ -9,6 +10,7 @@ import 'package:blueconnectapp/core/veiwModels/createview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/feedsview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/forgotpasswordview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/gettingstartedview_model.dart';
+import 'package:blueconnectapp/core/veiwModels/groupview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/homeview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/profileview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/settingsview_model.dart';
@@ -41,6 +43,8 @@ void setUpLocator(){
   locator.registerLazySingleton(() => ProfileViewModel());
   locator.registerLazySingleton(() => SettingsViewModel());
   locator.registerLazySingleton(() => WebViewModel());
+  locator.registerLazySingleton(() => GroupService());
+  locator.registerLazySingleton(() => GroupViewModel());
 
   locator.registerLazySingleton(() => SignUpViewModel());
 }
