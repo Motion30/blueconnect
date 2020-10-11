@@ -28,7 +28,7 @@ class CreateScreen extends StatelessWidget {
                 Icons.cancel,
               ),
               onPressed: () {
-                model.raiseSearch();
+                model.dropSearch();
               },
             ),
           ),
@@ -145,6 +145,7 @@ class CreateScreen extends StatelessWidget {
               leading: CircleAvatar(
                 child: Text('A'),
                 foregroundColor: KSecondaryColorGrey,
+                backgroundColor: KPrimaryColor2,
               ),
               title: Text("User $index"),
             ),

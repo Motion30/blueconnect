@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   PopupMenuItem(
                       child: GestureDetector(
                         onTap: (){
+                          model.navigateToProfile();
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -60,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   PopupMenuItem(
                       child: GestureDetector(
                         onTap: (){
+                          model.navigateToSettings();
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,

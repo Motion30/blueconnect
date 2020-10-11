@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:blueconnectapp/core/constants/route_paths.dart';
 // Set up router for the project
 
-class Router {
+class XRouter {
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch(settings.name){
       case Routes.INDEX_SCREEN :

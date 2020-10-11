@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 30,
               ),
               RoundButton(
-                btnTitle: "UPDATE",
+                btnTitle: "UPDATE PROFILE",
                 onTap: () {},
               ),
             ],
