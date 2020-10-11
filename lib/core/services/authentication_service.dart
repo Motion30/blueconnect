@@ -25,6 +25,7 @@ class AuthenticationService {
     }
   }
 
+  // Sign up with Email and Password
   Future signUpWithEmail({ @required String email, @required String password, @required String fullName, @required String phone }) async{
     try{
       var result = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
@@ -44,6 +45,7 @@ class AuthenticationService {
       return e.message;
     }
   }
+
   // Gets the current user
   Future<bool> isUserLoggedIn() async{
     var user = _firebaseAuth.currentUser;
@@ -56,6 +58,11 @@ class AuthenticationService {
     if(user != null) {
       _currentUser = await _userService.getUser(uid: user.uid);
     }
+  }
+
+  Future signOut() async{
+    var result = await _firebaseAuth.signOut();
+    return true;
   }
 
 }

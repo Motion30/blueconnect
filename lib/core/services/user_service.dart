@@ -15,9 +15,11 @@ class UserService {
   Future getUser({ String uid }) async {
     try{
       var userData = await _usersCollection.doc(uid).get();
+      print(userData.data());
       return AppUser.fromData(userData.data());
     }catch(e){
-      return e.message;
+      // return e.message;
+      print(e.toString());
     }
   }
 }

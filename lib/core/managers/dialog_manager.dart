@@ -8,14 +8,13 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class DialogManager extends StatefulWidget {
   final Widget child;
 
-  const DialogManager({ Key key, this.child }) : super(key: key);
+  const DialogManager({Key key, this.child}) : super(key: key);
 
   @override
   _DialogManagerState createState() => _DialogManagerState();
 }
 
 class _DialogManagerState extends State<DialogManager> {
-
   DialogService _dialogService = locator<DialogService>();
 
   @override
@@ -29,18 +28,22 @@ class _DialogManagerState extends State<DialogManager> {
     return widget.child;
   }
 
-  void _showDialog(AlertRequest request){
+  void _showDialog(AlertRequest request) {
     Alert(
         context: context,
-        title: "FilledStacks",
-        desc: "My tutorials show real world structure",
-        closeFunction: () => _dialogService.dialogComplete(AlertResponse(confirmed: false)),
+        title: request.title,
+        desc: request.description,
+        closeFunction: () =>
+            _dialogService.dialogComplete(AlertResponse(confirmed: false)),
         buttons: [
-          DialogButton(child: Text("Ok"), onPressed: (){
-            _dialogService.dialogComplete(AlertResponse(confirmed: true));
-            Navigator.of(context).pop();
-          }),
-        ]
-    ).show();
+          DialogButton(
+              child: Text(
+                request.buttonTitle,
+              ),
+              onPressed: () {
+                _dialogService.dialogComplete(AlertResponse(confirmed: true));
+                Navigator.of(context).pop();
+              }),
+        ]).show();
   }
 }

@@ -23,12 +23,18 @@ class SignUpViewModel extends BaseModel{
 
     if(result is bool){
     //  Navigate to the home view route
+      _navigationService.navigatorKey.currentState.pushReplacementNamed(Routes.HOME_SCREEN);
     }else{
-
+        _dialogService.showDialog(
+          title: 'Error',
+          description: result,
+          buttonTitle: 'Ok'
+        );
     }
   }
 
   void navigateToLogin(){
-    _navigationService.navigatorKey.currentState.pushNamed(Routes.LOGIN_SCREEN);
+    _navigationService.navigatorKey.currentState.pushReplacementNamed(Routes.LOGIN_SCREEN);
   }
+
 }

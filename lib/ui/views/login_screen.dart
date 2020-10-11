@@ -1,5 +1,10 @@
+import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/veiwModels/signInViewModel.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
+import 'package:blueconnectapp/ui/widgets/input_label.dart';
+import 'package:blueconnectapp/ui/widgets/page_description.dart';
+import 'package:blueconnectapp/ui/widgets/page_title.dart';
+import 'package:blueconnectapp/ui/widgets/round_btn.dart';
 import 'package:flutter/material.dart';
 import 'base_view.dart';
 
@@ -18,42 +23,27 @@ class _LoginScreenState extends State<LoginScreen> {
     return BaseView<SignInViewModel>(builder: (context, model, child) => Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          height: model.state == ViewState.Busy ? MediaQuery.of(context).size.height : null,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
+          child: model.state == ViewState.Busy ?
+          Center(child: CircularProgressIndicator(),)
+
+          : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 80,),
 
-              Text(
-                "Sign in",
-                style: TextStyle(
-                    color: KPrimaryColor2,
-                    fontSize: 24,
-                    fontFamily: "PoppinsSemiBold"
-                ),
-              ),
+              PageTitle(title: "Sign in",),
 
               SizedBox(height: 10,),
 
-              Text(
-                "Sign in to continue",
-                style: TextStyle(
-                    color: KSecondaryColorDarkShade,
-                    fontFamily: "PoppinsMedium"
-                ),
-              ),
+              PageDescription(description: "Sign in to continue.",),
 
               SizedBox(
                 height: 50,
               ),
 
-              Text(
-                "EMAIL",
-                style: TextStyle(
-                    color: KPrimaryColor2,
-                    fontFamily: "PoppinsBold"
-                ),
-              ),
+              InputLabel(label: "EMAIL",),
 
               TextFormField(
                 controller: _email,
@@ -61,13 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SizedBox(height: 30,),
 
-              Text(
-                "PASSWORD",
-                style: TextStyle(
-                    color: KPrimaryColor2,
-                    fontFamily: "PoppinsBold"
-                ),
-              ),
+              InputLabel(label: "PASSWORD",),
 
               TextFormField(
                 obscureText: true,
@@ -92,29 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SizedBox(height: 30,),
 
-              GestureDetector(
-                onTap: () async{
+              RoundButton(btnTitle: "SIGN IN", onTap: () async{
                   await model.login(email: _email.text, password: _password.text);
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                  decoration: BoxDecoration(
-                    color: KPrimaryColor2,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Container(
-                    child: Text(
-                      "SIGN IN",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: KPrimaryWhite,
-                          fontFamily: "PoppinsRegular",
-                          fontWeight: FontWeight.w500
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              },),
 
               SizedBox(height: 25,),
 
