@@ -9,4 +9,6 @@ class Routes {
   static const HOME_SCREEN = '/home-screen';
   static const CREATE_SCREEN = '/create-screen';
   static const ADD_GROUP_SCREEN = '/add-group-screen';
+  static const PROFILE_SCREEN = '/profile-screen';
+  static const SETTINGS_SCREEN = '/settings-screen';
 }

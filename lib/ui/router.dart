@@ -1,8 +1,11 @@
+import 'package:blueconnectapp/ui/views/add_screen.dart';
 import 'package:blueconnectapp/ui/views/create_screen.dart';
 import 'package:blueconnectapp/ui/views/forgotpassword_screen.dart';
 import 'package:blueconnectapp/ui/views/gettingstarted_screen.dart';
 import 'package:blueconnectapp/ui/views/home_screen.dart';
 import 'package:blueconnectapp/ui/views/login_screen.dart';
+import 'package:blueconnectapp/ui/views/profile_screen.dart';
+import 'package:blueconnectapp/ui/views/settings_screen.dart';
 import 'package:blueconnectapp/ui/views/signup_screen.dart';
 import 'package:blueconnectapp/ui/views/startup_screen.dart';
 import 'package:blueconnectapp/ui/views/verification_screen.dart';
@@ -38,7 +41,13 @@ class Router {
         return MaterialPageRoute(builder: (_) => CreateScreen());
 
       case Routes.ADD_GROUP_SCREEN:
-        return MaterialPageRoute(builder: (_) => null);
+        return MaterialPageRoute(builder: (_) => AddScreen());
+
+      case Routes.PROFILE_SCREEN:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+
+      case Routes.SETTINGS_SCREEN:
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

@@ -22,7 +22,7 @@ class HomeViewModel extends BaseModel{
    }
    
    void navigateToProfile(){
-     
+     _navigationService.navigateTo()
    }
    
    void navigateToSettings(){
