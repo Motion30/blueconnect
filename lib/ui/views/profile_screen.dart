@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/veiwModels/profileview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
 import 'package:blueconnectapp/ui/widgets/input_label.dart';
@@ -25,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _email.text = model.email;
         _fullName.text = model.fullName;
         _phone.text = model.phone;
+        _quote.text = model.quote;
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -39,8 +41,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         body: SingleChildScrollView(
           child: Container(
+            height: model.state == ViewState.Busy? MediaQuery.of(context).size.height : null,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Column(
+            child: model.state == ViewState.Busy?
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+              :  Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 PageTitle(
@@ -97,7 +104,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 RoundButton(
                   btnTitle: "UPDATE PROFILE",
-                  onTap: () {},
+                  onTap: () async{
+                    await model.updateProfile(
+                      fullName: _fullName.text,
+                      email: _email.text,
+                      quote: _quote.text,
+                      phone: _phone.text
+                    );
+                  },
                 ),
               ],
             ),

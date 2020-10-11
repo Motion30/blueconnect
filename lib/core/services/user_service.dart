@@ -15,11 +15,19 @@ class UserService {
   Future getUser({ String uid }) async {
     try{
       var userData = await _usersCollection.doc(uid).get();
-      print(userData.data());
       return AppUser.fromData(userData.data());
     }catch(e){
-      // return e.message;
-      print(e.toString());
+      return e.message;
+      // print(e.toString());
+    }
+  }
+
+  Future updateUser(AppUser user) async {
+    try{
+      await _usersCollection.doc(user.id).update(user.toJson());
+      return true;
+    }catch(e){
+      return e.message;
     }
   }
 }
