@@ -22,7 +22,7 @@ class ProfileViewModel extends BaseModel{
   String get id => _authenticationService.currentUser.id;
 
   // Just if it's not yet set
-  String get quote => _authenticationService.currentUser.quote ?? '';
+  String get quote => _authenticationService.currentUser.quote;
 
   Future updateProfile({ String fullName, String email, String phone , String quote }) async{
     setState(ViewState.Busy);
