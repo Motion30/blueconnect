@@ -17,14 +17,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   TabController _tabController;
 
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this, initialIndex: 1);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
+      onModelReady: (model){
+        _tabController = TabController(length: 4, vsync: this, initialIndex: 1);
+      },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           title: Text(
@@ -42,8 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 itemBuilder: (context) => [
                   PopupMenuItem(
                       child: GestureDetector(
-                        onTap: () async{
-                          model.signOut();
+                        onTap: (){
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -63,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                   PopupMenuItem(
                       child: GestureDetector(
-                        onTap: () async{
-                          model.signOut();
+                        onTap: (){
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -85,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   PopupMenuItem(
                       child: GestureDetector(
                         onTap: () async{
-                          model.signOut();
+                          await model.signOut();
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
