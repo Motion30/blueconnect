@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           child: TabBarView(
             controller: _tabController,
             children: [
-              Feeds(),
+              FeedsList(),
 
               ChatList(
                 chat: ChatType.Private,
