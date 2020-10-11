@@ -50,6 +50,48 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
+                              Icons.supervised_user_circle,
+                              color: KSecondaryColorDarkGrey,
+                            ),
+                            SizedBox(width: 10,),
+                            Text(
+                                "Profile"
+                            )
+                          ],
+                        ),
+                      )),
+
+                  PopupMenuItem(
+                      child: GestureDetector(
+                        onTap: () async{
+                          model.signOut();
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.settings,
+                              color: KSecondaryColorDarkGrey,
+                            ),
+                            SizedBox(width: 10,),
+                            Text(
+                                "Setting"
+                            )
+                          ],
+                        ),
+                      )),
+
+                  PopupMenuItem(
+                      child: GestureDetector(
+                        onTap: () async{
+                          model.signOut();
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
                               Icons.exit_to_app,
                               color: KSecondaryColorDarkGrey,
                             ),

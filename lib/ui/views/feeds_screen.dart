@@ -13,7 +13,7 @@ class FeedsList extends StatelessWidget {
       builder: (context, model, child) => RefreshIndicator(
         onRefresh: model.setFeeds,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
           child: model.state == ViewState.Busy
               ? Center(
                   child: CircularProgressIndicator(),
@@ -22,11 +22,17 @@ class FeedsList extends StatelessWidget {
                   separatorBuilder: (context, index) => Divider(),
                   itemCount: model.feeds.length,
                   itemBuilder: (context, index) => ListTile(
-                        title: Text(model.feeds[index].title),
+                        title: Text(
+                          model.feeds[index].title,
+                          style: TextStyle(
+                            fontFamily: 'PoppinsRegular',
+                            fontSize: 14,
+                          ),
+                        ),
                         onTap: () {
                           //  Go to the web view
                         },
-                        subtitle: Text(model.feeds[index].description?? ''),
+                        subtitle: Text(model.feeds[index].description ?? ''),
                       )),
         ),
       ),
