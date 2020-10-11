@@ -1,0 +1,35 @@
+import 'package:blueconnectapp/ui/shared/colors.dart';
+import 'package:flutter/material.dart';
+
+class RoundButton extends StatelessWidget {
+  final String btnTitle;
+
+  const RoundButton({ Key key, this.btnTitle }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        //  Add a function here to navigate to verification screen
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+        decoration: BoxDecoration(
+          color: KPrimaryColor2,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Container(
+          child: Text(
+            btnTitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: KPrimaryWhite,
+                fontFamily: "PoppinsRegular",
+                fontWeight: FontWeight.w500
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

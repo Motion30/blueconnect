@@ -1,6 +1,5 @@
 import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/veiwModels/feedsview_model.dart';
-import 'package:blueconnectapp/ui/shared/colors.dart';
 
 import 'base_view.dart';
 import 'package:flutter/material.dart';
