@@ -11,15 +11,14 @@ class FeedsViewModel extends BaseModel{
   NavigationService _navigationService = locator<NavigationService>();
   NewsService _newsService = locator<NewsService>();
 
-  List<Feeds> _feeds;
-
-  List<Feeds> get feeds => [..._feeds];
+  List<Feeds> feeds;
 
   Future setFeeds() async{
     //Set the state to busy
     setState(ViewState.Busy);
 
-    _feeds = await _newsService.getNews();
+    feeds = await _newsService.getNews();
+
     notifyListeners();
     // Set the state back to idle
     setState(ViewState.Idle);

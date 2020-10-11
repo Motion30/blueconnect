@@ -10,7 +10,7 @@ class NewsService {
   static const String _url = 'http://newsapi.org/v2/top-headlines?country=us&apiKey=$_apiKey';
 
   // Fetch the news from the api
-  Future<List<Feeds>> getNews() async {
+  Future getNews() async {
     try{
       Response response = await get(_url);
 
@@ -19,13 +19,20 @@ class NewsService {
       List<Feeds> data = [];
 
       if(response.statusCode == 200){
-          data = responseData.map((e){
-            return Feeds.fromMap(e);
-          }).toList() as List<Feeds>;
+          data = [...responseData['articles'].map((e){
+            return Feeds(
+              title: e['title'],
+              description: e['description'],
+              image: e['urlToImage'],
+              publishedAt: DateTime.tryParse(e['publishedAt']).toUtc(),
+              url: e['url']
+            );
+          }).toList()];
       }
       return data;
     }catch(e){
-      return e.message;
+      print(e.toString());
+      return e.toString();
     }
   }
 }

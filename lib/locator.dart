@@ -1,6 +1,7 @@
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/dialog_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
+import 'package:blueconnectapp/core/services/news_service.dart';
 import 'package:blueconnectapp/core/services/user_service.dart';
 import 'package:blueconnectapp/core/veiwModels/addview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/chatview_model.dart';
@@ -33,6 +34,7 @@ void setUpLocator(){
   locator.registerLazySingleton(() => AddViewModel());
   locator.registerLazySingleton(() => ForgotPasswordViewModel());
   locator.registerLazySingleton(() => CreateViewModel());
+  locator.registerLazySingleton(() => NewsService());
 
   locator.registerLazySingleton(() => SignUpViewModel());
 }

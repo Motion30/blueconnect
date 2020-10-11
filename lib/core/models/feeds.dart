@@ -23,7 +23,7 @@ class Feeds{
     publishedAt = DateTime.tryParse(data['publishedAt']).toUtc();
 
 
-  Map<String, dynamic> toJson(){
+  Map<dynamic, dynamic> toJson(){
     return {
       'title' : title,
       'description' : description,
