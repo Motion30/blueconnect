@@ -30,6 +30,7 @@ class FeedsList extends StatelessWidget {
                         ),
                         onTap: () {
                           //  Go to the web view
+                          model.navigateToNewsPage(index);
                         },
                         subtitle: Text(model.feeds[index].description ?? ''),
                       )),

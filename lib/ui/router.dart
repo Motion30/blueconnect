@@ -9,6 +9,7 @@ import 'package:blueconnectapp/ui/views/settings_screen.dart';
 import 'package:blueconnectapp/ui/views/signup_screen.dart';
 import 'package:blueconnectapp/ui/views/startup_screen.dart';
 import 'package:blueconnectapp/ui/views/verification_screen.dart';
+import 'package:blueconnectapp/ui/views/web_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:blueconnectapp/core/constants/route_paths.dart';
 // Set up router for the project
@@ -48,6 +49,10 @@ class XRouter {
 
       case Routes.SETTINGS_SCREEN:
         return MaterialPageRoute(builder: (_) => SettingsScreen());
+
+      case Routes.WEB_SCREEN:
+        String arguments = settings.arguments;
+        return MaterialPageRoute(builder: (_) => WebScreen(url: arguments,));
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

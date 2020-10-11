@@ -16,6 +16,7 @@ import 'package:blueconnectapp/core/veiwModels/signInViewModel.dart';
 import 'package:blueconnectapp/core/veiwModels/signUpViewModel.dart';
 import 'package:blueconnectapp/core/veiwModels/startupview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/verificationview_model.dart';
+import 'package:blueconnectapp/core/veiwModels/webview_model.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
@@ -39,6 +40,7 @@ void setUpLocator(){
   locator.registerLazySingleton(() => NewsService());
   locator.registerLazySingleton(() => ProfileViewModel());
   locator.registerLazySingleton(() => SettingsViewModel());
+  locator.registerLazySingleton(() => WebViewModel());
 
   locator.registerLazySingleton(() => SignUpViewModel());
 }
