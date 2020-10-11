@@ -8,7 +8,7 @@ class HomeViewModel extends BaseModel{
   NavigationService _navigationService = locator<NavigationService>();
 
    void navigateToCreateScreen(){
-     _navigationService.navigatorKey.currentState.pushNamed(Routes.CREATE_SCREEN);
+     _navigationService.navigateTo(Routes.CREATE_SCREEN);
    }
 
    Future signOut() async{

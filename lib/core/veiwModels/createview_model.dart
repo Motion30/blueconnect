@@ -26,4 +26,8 @@ class CreateViewModel extends BaseModel{
     _navigationService.navigatorKey.currentState.pushNamed(Routes.ADD_GROUP_SCREEN);
   }
 
+  void navigateBack(){
+    _navigationService.goBack();
+  }
+
 }

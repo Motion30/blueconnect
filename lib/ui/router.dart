@@ -14,10 +14,10 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings){
     switch(settings.name){
       case Routes.INDEX_SCREEN :
-        return MaterialPageRoute(builder: (_) => GettingStartedScreen());
+        return MaterialPageRoute(builder: (_) => StartUpScreen());
 
       case Routes.START_UP_SCREEN:
-        return MaterialPageRoute(builder: (_) => StartUpScreen());
+        return MaterialPageRoute(builder: (_) => GettingStartedScreen());
 
       case Routes.LOGIN_SCREEN:
         return MaterialPageRoute(builder: (_) => LoginScreen());

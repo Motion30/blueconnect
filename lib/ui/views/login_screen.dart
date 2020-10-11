@@ -14,12 +14,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _password = TextEditingController();
 
   @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
-  @override
   Widget build(BuildContext context) {
     return BaseView<SignInViewModel>(builder: (context, model, child) => Scaffold(
       body: SingleChildScrollView(

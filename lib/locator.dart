@@ -32,7 +32,7 @@ void setUpLocator(){
   locator.registerLazySingleton(() => ChatViewModel());
   locator.registerLazySingleton(() => AddViewModel());
   locator.registerLazySingleton(() => ForgotPasswordViewModel());
-  locator.registerLazySingleton(() => CreateViewModel()); 
+  locator.registerLazySingleton(() => CreateViewModel());
 
   locator.registerLazySingleton(() => SignUpViewModel());
 }

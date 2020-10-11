@@ -7,6 +7,6 @@ class AddViewModel extends BaseModel{
     NavigationService _navigationService = locator<NavigationService>();
 
     void navigateBack(){
-      _navigationService.navigatorKey.currentState.pop();
+      _navigationService.goBack();
     }
 }
