@@ -37,7 +37,7 @@ class ChannelList extends StatelessWidget {
                     fontFamily: 'PoppinsSemiBold'),
               ),
               trailing: model.channels[index].admin != model.user &&
-                  model.channels[index].users.contains(model.user)
+                  !model.channels[index].users.contains(model.user)
                   ? FlatButton(
                 color: KPrimaryColor2,
                 onPressed: () async{

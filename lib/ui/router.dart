@@ -64,7 +64,11 @@ class XRouter {
 
       case Routes.CHANNEL_SCREEN:
           List<dynamic> arguments = settings.arguments;
-          return MaterialPageRoute(builder: (_)=> ChannelScreen());
+          return MaterialPageRoute(builder: (_)=> ChannelScreen(
+            chatTitle: arguments[0],
+            imageSrc: arguments[1],
+            channelIndex: arguments[2],
+          ));
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

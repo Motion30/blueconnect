@@ -62,7 +62,7 @@ class AuthenticationService {
 
   // Sign Out
   Future signOut() async{
-    var result = await _firebaseAuth.signOut();
+    await _firebaseAuth.signOut();
     return true;
   }
 
