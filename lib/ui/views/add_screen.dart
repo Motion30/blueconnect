@@ -1,6 +1,10 @@
+import 'package:blueconnectapp/core/enum/pricing_type.dart';
+import 'package:blueconnectapp/core/enum/view_state.dart';
+import 'package:blueconnectapp/core/enum/visibility.dart';
 import 'package:blueconnectapp/core/veiwModels/addview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
 import 'package:blueconnectapp/ui/widgets/input_label.dart';
+import 'package:blueconnectapp/ui/widgets/round_btn.dart';
 
 import 'base_view.dart';
 
@@ -14,7 +18,7 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   TextEditingController _name = TextEditingController();
   TextEditingController _description = TextEditingController();
-
+  TextEditingController _logo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,9 @@ class _AddScreenState extends State<AddScreen> {
             onPressed: () {
               model.navigateBack();
             },
-            icon: Icon(Icons.arrow_back,),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             color: KPrimaryWhite,
           ),
           title: Text(
@@ -39,18 +45,21 @@ class _AddScreenState extends State<AddScreen> {
         ),
         body: SingleChildScrollView(
           child: Container(
+            height: model.state == ViewState.Busy ? MediaQuery.of(context).size.height : null,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
+            child:model.state == ViewState.Busy ?
+                Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),)
+            : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                InputLabel(label: "NAME",),
-
+                InputLabel(
+                  label: "NAME",
+                ),
                 TextFormField(
                   style: TextStyle(
                       color: KSecondaryColorDarkShade,
                       fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
+                      fontSize: 16),
                   controller: _name,
                   decoration: InputDecoration(
                     hintText: 'Enter group name.',
@@ -60,19 +69,17 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: 30,
                 ),
-
-                InputLabel(label: "DESCRIPTION",),
-
+                InputLabel(
+                  label: "DESCRIPTION",
+                ),
                 TextFormField(
                   style: TextStyle(
                       color: KSecondaryColorDarkShade,
                       fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
+                      fontSize: 16),
                   controller: _description,
                   decoration: InputDecoration(
                     hintText: 'Enter description.',
@@ -82,19 +89,18 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: 30,
                 ),
-
-                InputLabel(label: "LOGO",),
-
+                InputLabel(
+                  label: "LOGO",
+                ),
                 TextFormField(
                   style: TextStyle(
                       color: KSecondaryColorDarkShade,
                       fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
+                      fontSize: 16),
+                  controller: _logo,
                   decoration: InputDecoration(
                     hintText: 'Select group logo.',
                     hintStyle: TextStyle(
@@ -103,34 +109,118 @@ class _AddScreenState extends State<AddScreen> {
                     ),
                   ),
                 ),
-
+                SizedBox(
+                  height: 30,
+                ),
+                InputLabel(
+                  label: "VISIBILITY",
+                ),
+                Container(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Public",
+                            style: TextStyle(
+                                color: KSecondaryColorLightDark,
+                                fontFamily: 'PoppinsRegular'
+                            ),
+                          ),
+                          leading: Radio(
+                            activeColor: KPrimaryColor2,
+                            value: Privacy.Public,
+                            groupValue: model.character,
+                            onChanged: (value) {
+                              model.setPrivacy(value);
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Private",
+                            style: TextStyle(
+                                color: KSecondaryColorLightDark,
+                                fontFamily: 'PoppinsRegular'
+                            ),
+                          ),
+                          leading: Radio(
+                            activeColor: KPrimaryColor2,
+                            value: Privacy.Private,
+                            groupValue: model.character,
+                            onChanged: (value) {
+                              model.setPrivacy(value);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                InputLabel(
+                  label: "PREMIUM",
+                ),
+                Container(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Paid",
+                            style: TextStyle(
+                                color: KSecondaryColorLightDark,
+                                fontFamily: 'PoppinsRegular'),
+                          ),
+                          leading: Radio(
+                            activeColor: KPrimaryColor2,
+                            value: Pricing.Premium,
+                            groupValue: model.pricing,
+                            onChanged: (value) {
+                              model.setPricing(value);
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Free",
+                            style: TextStyle(
+                                color: KSecondaryColorLightDark,
+                                fontFamily: 'PoppinsRegular'),
+                          ),
+                          leading: Radio(
+                            activeColor: KPrimaryColor2,
+                            value: Pricing.Free,
+                            groupValue: model.pricing,
+                            onChanged: (value) {
+                              model.setPricing(value);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 50,
                 ),
 
-                GestureDetector(
-                  onTap: (){
+                RoundButton(
+                  btnTitle: "CREATE GROUP",
+                  onTap: () async{
+                    await model.addGroup(name: _name.text, description: _description.text, logo: _logo.text);
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                    decoration: BoxDecoration(
-                      color: KPrimaryColor2,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "ADD GROUP",
-                        style: TextStyle(
-                            color: KPrimaryWhite,
-                            fontFamily: "PoppinsRegular",
-                            fontWeight: FontWeight.w500
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
-
               ],
             ),
           ),

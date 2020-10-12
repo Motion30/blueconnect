@@ -1,20 +1,28 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:blueconnectapp/core/veiwModels/webview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
 import 'base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebScreen extends StatelessWidget {
+class WebScreen extends StatefulWidget {
   final String url;
 
   const WebScreen({Key key, this.url}) : super(key: key);
 
   @override
+  _WebScreenState createState() => _WebScreenState();
+}
+
+class _WebScreenState extends State<WebScreen> {
+  Completer<WebViewController> _controller;
+  @override
   Widget build(BuildContext context) {
     return BaseView<WebViewModel>(
       onModelReady: (model) {
         if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+        _controller = Completer<WebViewController>();
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -35,7 +43,7 @@ class WebScreen extends StatelessWidget {
               ) : Container(),
               Expanded(
                 child: WebView(
-                  initialUrl: url,
+                  initialUrl: widget.url,
                   javascriptMode: JavascriptMode.unrestricted,
                   gestureNavigationEnabled: true,
                   onPageFinished: (_){
@@ -43,6 +51,9 @@ class WebScreen extends StatelessWidget {
                   },
                   onPageStarted: (_){
                     model.startLoading();
+                  },
+                  onWebViewCreated: (WebViewController controller){
+                    _controller.complete(controller);
                   },
                 ),
               ),

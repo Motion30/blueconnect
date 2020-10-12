@@ -31,7 +31,7 @@ class Group{
     : id = data['id'],
       name = data['name'],
       description = data['description'],
-      users = data['users'],
+      users = [...data['users']],
       admin = data['admin'],
       logo  = data['logo'],
       public = data['public'],

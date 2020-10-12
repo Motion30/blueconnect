@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.supervised_user_circle,
+                              Icons.account_circle,
                               color: KSecondaryColorDarkGrey,
                             ),
                             SizedBox(width: 10,),
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               tabs: [
                 Tab(
                   icon: Icon(
-                    Icons.assignment,
+                    Icons.public,
                     color: KPrimaryWhite,
                   ),
                   child: Text(
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
                 Tab(
                   icon: Icon(
-                    Icons.bubble_chart,
+                    Icons.live_tv_rounded,
                     color: KPrimaryWhite,
                   ),
                   child: Text(

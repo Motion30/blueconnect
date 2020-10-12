@@ -14,6 +14,7 @@ class GroupService {
   Future createGroup(Group group) async{
     try{
       await _groupCollection.doc(group.id).set(group.toJson());
+      return true;
     }catch(e){
       return e.message;
     }
@@ -23,6 +24,7 @@ class GroupService {
   Future updateGroup(Group group) async {
     try{
       await _groupCollection.doc(group.id).update(group.toJson());
+      return true;
     }catch(e){
       return e.message;
     }
@@ -42,6 +44,7 @@ class GroupService {
   Future deleteGroup ({ String groupId }) async {
     try{
       await _groupCollection.doc(groupId).delete();
+      return true;
     }catch(e){
       return e.message;
     }

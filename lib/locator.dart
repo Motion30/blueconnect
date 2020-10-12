@@ -4,6 +4,7 @@ import 'package:blueconnectapp/core/services/group_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/core/services/news_service.dart';
 import 'package:blueconnectapp/core/services/user_service.dart';
+import 'package:blueconnectapp/core/utils/random_string.dart';
 import 'package:blueconnectapp/core/veiwModels/addview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/chatview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/createview_model.dart';
@@ -45,6 +46,7 @@ void setUpLocator(){
   locator.registerLazySingleton(() => WebViewModel());
   locator.registerLazySingleton(() => GroupService());
   locator.registerLazySingleton(() => GroupViewModel());
+  locator.registerLazySingleton(() => GenerateRandomString());
 
   locator.registerLazySingleton(() => SignUpViewModel());
 }

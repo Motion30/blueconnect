@@ -23,7 +23,7 @@ class CreateViewModel extends BaseModel{
   }
 
   void navigateToAddScreen(){
-    _navigationService.navigatorKey.currentState.pushNamed(Routes.ADD_GROUP_SCREEN);
+    _navigationService.navigatorKey.currentState.pushReplacementNamed(Routes.ADD_GROUP_SCREEN);
   }
 
   void navigateBack(){
