@@ -1,5 +1,7 @@
+import 'package:blueconnectapp/core/enum/chat_type.dart';
 import 'package:blueconnectapp/core/veiwModels/createview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
+import 'package:blueconnectapp/ui/widgets/custom_tiles.dart';
 
 import 'base_view.dart';
 import 'package:flutter/material.dart';
@@ -74,70 +76,21 @@ class CreateScreen extends StatelessWidget {
               ? Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ListTile(
-                onTap: () {
-                  model.navigateToAddScreen();
-                },
-                leading: Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: KPrimaryColor2),
-                  child: Icon(
-                    Icons.group_add,
-                    color: KPrimaryWhite,
-                  ),
-                ),
-                title: Text(
-                  "Create Group",
-                  style: TextStyle(
-                    fontFamily: 'PoppinsRegular',
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+              CustomTile(label: "CREATE GROUP", onTap: (){
+                model.navigateToAddScreen(category: ChatType.Group);
+              },),
+
               Divider(),
-              ListTile(
-                onTap: () {},
-                leading: Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: KPrimaryColor2),
-                  child: Icon(
-                    Icons.group_work,
-                    color: KPrimaryWhite,
-                  ),
-                ),
-                title: Text(
-                  "Create Community",
-                  style: TextStyle(
-                    fontFamily: 'PoppinsRegular',
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+
+              CustomTile(label: "CREATE COMMUNITY", onTap: (){
+                model.navigateToAddScreen(category: ChatType.Community);
+              },),
+
               Divider(),
-              ListTile(
-                onTap: () {},
-                leading: Container(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: KPrimaryColor2),
-                  child: Icon(
-                    Icons.bubble_chart,
-                    color: KPrimaryWhite,
-                  ),
-                ),
-                title: Text(
-                  "Create Channel",
-                  style: TextStyle(
-                    fontFamily: 'PoppinsRegular',
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+
+              CustomTile(label: "CREATE CHANNEL", onTap: (){
+                model.navigateToAddScreen(category: ChatType.Channel);
+              },),
             ],
           )
               : ListView.separated(

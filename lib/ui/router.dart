@@ -42,7 +42,8 @@ class XRouter {
         return MaterialPageRoute(builder: (_) => CreateScreen());
 
       case Routes.ADD_GROUP_SCREEN:
-        return MaterialPageRoute(builder: (_) => AddScreen());
+        var arguments = settings.arguments;
+        return MaterialPageRoute(builder: (_) => AddScreen(category: arguments,));
 
       case Routes.PROFILE_SCREEN:
         return MaterialPageRoute(builder: (_) => ProfileScreen());

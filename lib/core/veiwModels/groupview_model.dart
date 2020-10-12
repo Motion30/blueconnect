@@ -2,6 +2,7 @@ import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/models/group.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/group_service.dart';
+import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/locator.dart';
 
 import 'base_model.dart';
@@ -11,6 +12,7 @@ class GroupViewModel extends BaseModel{
   List<Group> groups = [];
 
   GroupService _groupService = locator<GroupService>();
+  NavigationService _navigationService = locator<NavigationService>();
   AuthenticationService _authenticationService = locator<AuthenticationService>();
 
   String get user => _authenticationService.currentUser.id;
@@ -29,5 +31,7 @@ class GroupViewModel extends BaseModel{
     setState(ViewState.Idle);
   }
 
-
+  void navigateToGroupChat(){
+    _navigationService.navigateTo('');
+  }
 }

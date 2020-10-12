@@ -38,7 +38,7 @@ class Group{
       premium = data['premium'],
       groupKey = data['groupKey'],
       groupLink = data['groupLink'],
-      price = data['price'];
+      price = '${data['price']}';
 
   Map<String, dynamic> toJson(){
     return {

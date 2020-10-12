@@ -11,6 +11,10 @@ import 'base_view.dart';
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatefulWidget {
+  final String category;
+
+  const AddScreen({ Key key, this.category }) : super(key: key);
+
   @override
   _AddScreenState createState() => _AddScreenState();
 }
@@ -36,7 +40,7 @@ class _AddScreenState extends State<AddScreen> {
             color: KPrimaryWhite,
           ),
           title: Text(
-            "Add Group",
+            "Add ${widget.category}",
             style: TextStyle(
               fontFamily: 'PoppinsRegular',
               color: KPrimaryWhite,
@@ -62,7 +66,7 @@ class _AddScreenState extends State<AddScreen> {
                       fontSize: 16),
                   controller: _name,
                   decoration: InputDecoration(
-                    hintText: 'Enter group name.',
+                    hintText: 'Enter ${widget.category} name.',
                     hintStyle: TextStyle(
                       color: KSecondaryColorDarkGrey,
                       fontFamily: 'PoppinsRegular',
@@ -82,7 +86,7 @@ class _AddScreenState extends State<AddScreen> {
                       fontSize: 16),
                   controller: _description,
                   decoration: InputDecoration(
-                    hintText: 'Enter description.',
+                    hintText: 'Enter ${widget.category} description.',
                     hintStyle: TextStyle(
                       color: KSecondaryColorDarkGrey,
                       fontFamily: 'PoppinsRegular',
@@ -102,7 +106,7 @@ class _AddScreenState extends State<AddScreen> {
                       fontSize: 16),
                   controller: _logo,
                   decoration: InputDecoration(
-                    hintText: 'Select group logo.',
+                    hintText: 'Select ${widget.category} logo.',
                     hintStyle: TextStyle(
                       color: KSecondaryColorDarkGrey,
                       fontFamily: 'PoppinsRegular',
@@ -216,7 +220,7 @@ class _AddScreenState extends State<AddScreen> {
                 ),
 
                 RoundButton(
-                  btnTitle: "CREATE GROUP",
+                  btnTitle: "CREATE ${widget.category}",
                   onTap: () async{
                     await model.addGroup(name: _name.text, description: _description.text, logo: _logo.text);
                   },

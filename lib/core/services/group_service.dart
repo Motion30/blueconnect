@@ -65,4 +65,8 @@ class GroupService {
       // Return the stream underlying our _groupController
       return _groupController.stream;
   }
+
+  Future addGroupChat() async {
+
+  }
 }

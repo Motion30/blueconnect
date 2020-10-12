@@ -54,6 +54,7 @@ class AddViewModel extends BaseModel{
             logo: logo,
             groupKey: '',
             groupLink: '',
+            price: '0',
         ));
 
        setState(ViewState.Idle);
