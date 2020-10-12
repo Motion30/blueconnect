@@ -26,8 +26,11 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseView<ConversationViewModel>(
+      onModelDisposed: (model){
+        _message.dispose();
+      },
       onModelReady: (model){
-        model.setGroupIndex(1);
+        model.setGroupIndex(widget.groupIndex);
         // Pull the community chats
         model.pullCommunityChats();
       },
@@ -169,7 +172,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                 ),
                                 Divider(),
                                 Text(
-                                  "12:00PM",
+                                  '${model.chats[index].timeSent.hour}:${model.chats[index].timeSent.minute} ',
                                   textAlign: model.chats[index].sender != model.user
                                       ? TextAlign.left
                                       : TextAlign.right,

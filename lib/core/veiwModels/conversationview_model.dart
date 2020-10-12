@@ -44,12 +44,6 @@ class ConversationViewModel extends BaseModel{
         ),
         communityId: communityId
     );
-
-    if(result is bool){
-
-    }else{
-
-    }
   }
 
   void pullCommunityChats(){
