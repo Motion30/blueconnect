@@ -51,7 +51,7 @@ class ChannelService {
   }
 
   //   Get all groups [STREAM]
-  Stream getGroups(){
+  Stream getChannels(){
     // Request for the snapshots
     _channelCollection.snapshots().listen((chanelSnapshots) {
       //Check if it has data

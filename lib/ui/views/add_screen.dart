@@ -27,6 +27,9 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseView<AddViewModel>(
+      onModelReady: (model){
+
+      },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           backgroundColor: KPrimaryColor2,
@@ -222,6 +225,10 @@ class _AddScreenState extends State<AddScreen> {
                 RoundButton(
                   btnTitle: "CREATE ${widget.category}",
                   onTap: () async{
+                    // switch(widget.category){
+                    //   case 'Group':
+                    //
+                    // }
                     await model.addGroup(name: _name.text, description: _description.text, logo: _logo.text);
                   },
                 ),
