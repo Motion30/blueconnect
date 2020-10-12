@@ -48,8 +48,7 @@ class GroupService {
   }
 
   //   Get all groups [STREAM]
-  Future getGroups() async {
-    try{
+  Stream getGroups(){
       // Request for the snapshots
       _groupCollection.snapshots().listen((groupSnapshots) {
         //Check if it has data
@@ -62,8 +61,5 @@ class GroupService {
 
       // Return the stream underlying our _groupController
       return _groupController.stream;
-    }catch(e){
-      return e.message;
-    }
   }
 }

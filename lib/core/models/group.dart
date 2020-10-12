@@ -4,6 +4,7 @@ class Group{
   final String id;
   final String name;
   final String description;
+  final String logo;
   final List<String> users;
   final String admin;
   final String groupLink;
@@ -20,6 +21,7 @@ class Group{
     @required this.admin,
     @required this.public,
     @required this.premium,
+    @required this.logo,
     this.groupKey,
     this.groupLink,
     this.price
@@ -31,6 +33,7 @@ class Group{
       description = data['description'],
       users = data['users'],
       admin = data['admin'],
+      logo  = data['logo'],
       public = data['public'],
       premium = data['premium'],
       groupKey = data['groupKey'],
@@ -41,6 +44,7 @@ class Group{
     return {
       'id' : id,
       'name' : name,
+      'logo' : logo,
       'description' : description,
       'users' : users,
       'admin' : admin,

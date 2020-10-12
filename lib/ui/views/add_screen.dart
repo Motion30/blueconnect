@@ -1,11 +1,21 @@
 import 'package:blueconnectapp/core/veiwModels/addview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
+import 'package:blueconnectapp/ui/widgets/input_label.dart';
 
 import 'base_view.dart';
 
 import 'package:flutter/material.dart';
 
-class AddScreen extends StatelessWidget {
+class AddScreen extends StatefulWidget {
+  @override
+  _AddScreenState createState() => _AddScreenState();
+}
+
+class _AddScreenState extends State<AddScreen> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _description = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return BaseView<AddViewModel>(
@@ -33,14 +43,7 @@ class AddScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  "Name",
-                  style: TextStyle(
-                      color: KPrimaryColor2,
-                      fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
-                ),
+                InputLabel(label: "NAME",),
 
                 TextFormField(
                   style: TextStyle(
@@ -48,6 +51,7 @@ class AddScreen extends StatelessWidget {
                       fontFamily: 'PoppinsRegular',
                       fontSize: 16
                   ),
+                  controller: _name,
                   decoration: InputDecoration(
                     hintText: 'Enter group name.',
                     hintStyle: TextStyle(
@@ -61,14 +65,7 @@ class AddScreen extends StatelessWidget {
                   height: 30,
                 ),
 
-                Text(
-                  "Description",
-                  style: TextStyle(
-                      color: KPrimaryColor2,
-                      fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
-                ),
+                InputLabel(label: "DESCRIPTION",),
 
                 TextFormField(
                   style: TextStyle(
@@ -76,6 +73,7 @@ class AddScreen extends StatelessWidget {
                       fontFamily: 'PoppinsRegular',
                       fontSize: 16
                   ),
+                  controller: _description,
                   decoration: InputDecoration(
                     hintText: 'Enter description.',
                     hintStyle: TextStyle(
@@ -89,14 +87,7 @@ class AddScreen extends StatelessWidget {
                   height: 30,
                 ),
 
-                Text(
-                  "Group Logo",
-                  style: TextStyle(
-                      color: KPrimaryColor2,
-                      fontFamily: 'PoppinsRegular',
-                      fontSize: 16
-                  ),
-                ),
+                InputLabel(label: "LOGO",),
 
                 TextFormField(
                   style: TextStyle(
