@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: model.state == ViewState.Busy?
                 Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),
                 )
               :  Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

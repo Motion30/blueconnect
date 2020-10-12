@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: model.state == ViewState.Busy ? MediaQuery.of(context).size.height : null,
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: model.state == ViewState.Busy ?
-          Center(child: CircularProgressIndicator(),)
+          Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),)
 
           : Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

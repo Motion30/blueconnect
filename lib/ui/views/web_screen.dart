@@ -13,8 +13,8 @@ class WebScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<WebViewModel>(
-      onModelReady: (model){
-        if(Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+      onModelReady: (model) {
+        if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -26,10 +26,28 @@ class WebScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: WebView(
-          initialUrl: url,
-          javascriptMode: JavascriptMode.unrestricted,
-          gestureNavigationEnabled: true,
+        body: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              model.isLoading? LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(KPrimaryColor2),
+              ) : Container(),
+              Expanded(
+                child: WebView(
+                  initialUrl: url,
+                  javascriptMode: JavascriptMode.unrestricted,
+                  gestureNavigationEnabled: true,
+                  onPageFinished: (_){
+                    model.finishLoading();
+                  },
+                  onPageStarted: (_){
+                    model.startLoading();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
