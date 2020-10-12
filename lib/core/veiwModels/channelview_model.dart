@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/core/constants/route_paths.dart';
 import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/models/channel.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
@@ -31,7 +32,7 @@ class ChannelViewModel extends BaseModel{
     setState(ViewState.Idle);
   }
 
-  void navigateToChannelChat(){
-    _navigationService.navigateTo('');
+  void navigateToChannelChat({ String chatTitle, String imageSrc, int channelIndex }){
+    _navigationService.navigateTo(Routes.CHANNEL_SCREEN,arguments: [chatTitle, imageSrc, channelIndex]);
   }
 }
