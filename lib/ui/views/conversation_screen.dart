@@ -3,18 +3,33 @@ import 'package:blueconnectapp/ui/shared/colors.dart';
 import 'base_view.dart';
 import 'package:flutter/material.dart';
 
-class ConversationScreen extends StatelessWidget {
+class ConversationScreen extends StatefulWidget {
   final String imageSrc;
   final String chatTitle;
   final int groupIndex;
 
-  const ConversationScreen({ Key key, @required this.imageSrc, @required this.chatTitle, @required this.groupIndex }) : super(key: key);
+  const ConversationScreen({
+    Key key,
+    @required this.imageSrc,
+    @required this.chatTitle,
+    @required this.groupIndex
+  }) : super(key: key);
+
+  @override
+  _ConversationScreenState createState() => _ConversationScreenState();
+}
+
+class _ConversationScreenState extends State<ConversationScreen> {
+
+  TextEditingController _message = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BaseView<ConversationViewModel>(
       onModelReady: (model){
         model.setGroupIndex(1);
+        // Pull the community chats
+        model.pullCommunityChats();
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -35,7 +50,7 @@ class ConversationScreen extends StatelessWidget {
                 ),
                 CircleAvatar(
                   radius: 15,
-                  backgroundImage: NetworkImage(imageSrc),
+                  backgroundImage: NetworkImage(widget.imageSrc),
                 )
               ],
             ),
@@ -49,7 +64,7 @@ class ConversationScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
               child: Text(
-                chatTitle,
+                widget.chatTitle,
                 style: TextStyle(
                     color: KPrimaryWhite,
                     fontFamily: 'PoppinsRegular'
@@ -105,9 +120,9 @@ class ConversationScreen extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                           height: 5,
                         ),
-                        itemCount: 10,
+                        itemCount: model.chats.length,
                         itemBuilder: (context, index) => Container(
-                          alignment: index % 2 == 0
+                          alignment: model.chats[index].sender != model.user
                               ? Alignment.centerLeft
                               : Alignment.centerRight,
                           child: Container(
@@ -143,8 +158,8 @@ class ConversationScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Text(
-                                  "Hello",
-                                  textAlign: index % 2 == 0
+                                  model.chats[index].message,
+                                  textAlign: model.chats[index].sender != model.user
                                       ? TextAlign.left
                                       : TextAlign.right,
                                   style: TextStyle(
@@ -155,7 +170,7 @@ class ConversationScreen extends StatelessWidget {
                                 Divider(),
                                 Text(
                                   "12:00PM",
-                                  textAlign: index % 2 == 0
+                                  textAlign: model.chats[index].sender != model.user
                                       ? TextAlign.left
                                       : TextAlign.right,
                                   style: TextStyle(
@@ -184,11 +199,13 @@ class ConversationScreen extends StatelessWidget {
                               padding: EdgeInsets.all(0.0),
                               disabledColor: KSecondaryColorGrey,
                               icon: Icon(Icons.attach_file),
-                              onPressed: () {},
+                              onPressed: () {
+                                  // Open file for selecting images
+                              },
                             ),
                             Flexible(
-                              child: TextField(
-                                controller: null,
+                              child: TextFormField(
+                                controller: _message,
                                 textCapitalization: TextCapitalization.sentences,
                                 textInputAction: TextInputAction.send,
                                 decoration: InputDecoration(
@@ -223,7 +240,12 @@ class ConversationScreen extends StatelessWidget {
                                 splashRadius: 5,
                                 icon: Icon(Icons.send),
                                 color: KPrimaryWhite,
-                                onPressed: () {},
+                                onPressed: () {
+                                  //  Send message
+                                  if(_message.text.isNotEmpty){
+                                      model.sendMessage(message: _message.text);
+                                  }
+                                },
                               ),
                             ),
                           ],

@@ -51,7 +51,10 @@ class GroupViewModel extends BaseModel{
   }
 
   void navigateToGroupChat({ String chatTitle, String imageSrc, int groupIndex }){
-    _navigationService.navigateTo(Routes.CHAT_SCREEN, arguments: [chatTitle, imageSrc, groupIndex]);
+    _navigationService.navigateTo(
+        Routes.CHAT_SCREEN,
+        arguments: [chatTitle, imageSrc, groupIndex]
+    );
   }
 
 }
