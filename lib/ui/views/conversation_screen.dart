@@ -243,7 +243,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                 onPressed: () {
                                   //  Send message
                                   if(_message.text.isNotEmpty){
-                                      model.sendMessage(message: _message.text);
+                                      model.sendCommunityMessage(message: _message.text);
                                   }
                                 },
                               ),

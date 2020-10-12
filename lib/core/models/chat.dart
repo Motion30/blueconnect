@@ -16,7 +16,7 @@ class Chat{
   Chat.fromMap(Map<String, dynamic> data)
     : message = data['message'],
       sender  = data['sender'],
-      timeSent = data['timeSent'],
+      timeSent = DateTime.tryParse(data['timeSent']),
       isImage  = data['isImage'];
 
 
@@ -24,7 +24,7 @@ class Chat{
     return {
       'message' : message,
       'sender' : sender,
-      'timeSent' : timeSent,
+      'timeSent' : timeSent.toString(),
       'isImage' : isImage,
     };
   }

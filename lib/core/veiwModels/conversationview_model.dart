@@ -57,7 +57,7 @@ class ConversationViewModel extends BaseModel{
       _communityService.getCommunityChats(communityId: communityId).listen((communityChatData) {
         List<Chat> updatedChats = communityChatData;
         if(updatedChats != null  && updatedChats.length > 0){
-          chats = updatedChats;
+          chats = [...updatedChats.reversed];
           notifyListeners();
         }
       });
