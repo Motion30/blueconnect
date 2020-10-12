@@ -50,8 +50,8 @@ class GroupViewModel extends BaseModel{
     setState(ViewState.Idle);
   }
 
-  void navigateToGroupChat({ String chatTitle, String imageSrc }){
-    _navigationService.navigateTo(Routes.CHAT_SCREEN, arguments: [chatTitle, imageSrc]);
+  void navigateToGroupChat({ String chatTitle, String imageSrc, int groupIndex }){
+    _navigationService.navigateTo(Routes.CHAT_SCREEN, arguments: [chatTitle, imageSrc, groupIndex]);
   }
 
 }

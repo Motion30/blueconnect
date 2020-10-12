@@ -6,12 +6,16 @@ import 'package:flutter/material.dart';
 class ConversationScreen extends StatelessWidget {
   final String imageSrc;
   final String chatTitle;
+  final int groupIndex;
 
-  const ConversationScreen({ Key key, @required this.imageSrc, @required this.chatTitle }) : super(key: key);
+  const ConversationScreen({ Key key, @required this.imageSrc, @required this.chatTitle, @required this.groupIndex }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BaseView<ConversationViewModel>(
+      onModelReady: (model){
+        model.setGroupIndex(1);
+      },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           backgroundColor: KPrimaryColor2,

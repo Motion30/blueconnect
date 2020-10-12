@@ -36,7 +36,8 @@ class GroupList extends StatelessWidget {
                             color: KSecondaryColorLightDark,
                             fontFamily: 'PoppinsSemiBold'),
                       ),
-                      trailing: model.combined[index].admin != model.user
+                      trailing: model.combined[index].admin != model.user &&
+                          !model.combined[index].users.contains(model.user)
                           ? FlatButton(
                               color: KPrimaryColor2,
                               onPressed: () {
@@ -55,7 +56,11 @@ class GroupList extends StatelessWidget {
                         //  Go to the chat screen
                         if (model.combined[index].admin == model.user ||
                             model.combined[index].users.contains(model.user)) {
-                              model.navigateToGroupChat(chatTitle: model.combined[index].name, imageSrc: model.combined[index].logo);
+                              model.navigateToGroupChat(
+                                  groupIndex: index,
+                                  chatTitle: model.combined[index].name,
+                                  imageSrc: model.combined[index].logo,
+                              );
                         }
 
                       //  Else if the group is closed or paid open another page
@@ -86,9 +91,10 @@ class GroupList extends StatelessWidget {
                             child: Text(
                               model.combined[index].type.toString().toUpperCase(),
                               style: TextStyle(
-                                color: KPrimaryWhite,
+                                color: KSecondaryColorGrey,
                                 fontFamily: 'PoppinsRegular',
-                                fontSize: 10
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
