@@ -4,6 +4,11 @@ import 'base_view.dart';
 import 'package:flutter/material.dart';
 
 class ConversationScreen extends StatelessWidget {
+  final String imageSrc;
+  final String chatTitle;
+
+  const ConversationScreen({ Key key, @required this.imageSrc, @required this.chatTitle }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BaseView<ConversationViewModel>(
@@ -14,7 +19,7 @@ class ConversationScreen extends StatelessWidget {
             shape: CircleBorder(),
             padding: EdgeInsets.only(left: 2.0),
             onPressed: () {
-              Navigator.pop(context);
+              model.navigateBack();
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -26,8 +31,7 @@ class ConversationScreen extends StatelessWidget {
                 ),
                 CircleAvatar(
                   radius: 15,
-                  backgroundColor: Colors.greenAccent,
-                  child: Text('A'),
+                  backgroundImage: NetworkImage(imageSrc),
                 )
               ],
             ),
@@ -39,7 +43,7 @@ class ConversationScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
               child: Text(
-                "Chat Name",
+                chatTitle,
                 style: TextStyle(
                     color: KPrimaryWhite,
                     fontFamily: 'PoppinsRegular'

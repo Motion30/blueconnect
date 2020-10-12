@@ -57,7 +57,8 @@ class XRouter {
         return MaterialPageRoute(builder: (_) => WebScreen(url: arguments,));
 
       case Routes.CHAT_SCREEN:
-          return MaterialPageRoute(builder: (_) => ConversationScreen());
+          List<String> arguments = settings.arguments;
+          return MaterialPageRoute(builder: (_) => ConversationScreen(chatTitle: arguments[0], imageSrc: arguments[1],));
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

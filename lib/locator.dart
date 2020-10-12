@@ -10,6 +10,7 @@ import 'package:blueconnectapp/core/utils/random_string.dart';
 import 'package:blueconnectapp/core/veiwModels/addview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/channelview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/chatview_model.dart';
+import 'package:blueconnectapp/core/veiwModels/conversationview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/createview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/feedsview_model.dart';
 import 'package:blueconnectapp/core/veiwModels/forgotpasswordview_model.dart';
@@ -54,4 +55,5 @@ void setUpLocator(){
   locator.registerLazySingleton(() => CommunityService());
   locator.registerLazySingleton(() => ChannelViewModel());
   locator.registerLazySingleton(() => SignUpViewModel());
+  locator.registerLazySingleton(() => ConversationViewModel());
 }
