@@ -15,22 +15,37 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
-      onModelReady: (model){
+      onModelReady: (model) {
         _tabController = TabController(length: 4, vsync: this, initialIndex: 1);
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           title: Text(
             "Blue Connect",
-            style: TextStyle(color: KPrimaryWhite, fontFamily: 'PoppinsRegular'),
+            style:
+                TextStyle(color: KPrimaryWhite, fontFamily: 'PoppinsRegular'),
           ),
           actions: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: IconButton(
+                splashRadius: 20,
+                onPressed: (){
+                  // Open the search field
+                },
+                icon: Icon(
+                  Icons.search,
+                  color: KPrimaryWhite,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: PopupMenuButton(
@@ -41,66 +56,64 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 itemBuilder: (context) => [
                   PopupMenuItem(
                       child: GestureDetector(
-                        onTap: (){
-                          model.navigateToProfile();
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.account_circle,
-                              color: KSecondaryColorDarkGrey,
-                            ),
-                            SizedBox(width: 10,),
-                            Text(
-                                "Profile"
-                            )
-                          ],
+                    onTap: () {
+                      model.navigateToProfile();
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.account_circle,
+                          color: KSecondaryColorDarkGrey,
                         ),
-                      )),
-
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("Profile")
+                      ],
+                    ),
+                  )),
                   PopupMenuItem(
                       child: GestureDetector(
-                        onTap: (){
-                          model.navigateToSettings();
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.settings,
-                              color: KSecondaryColorDarkGrey,
-                            ),
-                            SizedBox(width: 10,),
-                            Text(
-                                "Setting"
-                            )
-                          ],
+                    onTap: () {
+                      model.navigateToSettings();
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.settings,
+                          color: KSecondaryColorDarkGrey,
                         ),
-                      )),
-
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("Setting")
+                      ],
+                    ),
+                  )),
                   PopupMenuItem(
                       child: GestureDetector(
-                        onTap: () async{
-                          await model.signOut();
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.exit_to_app,
-                              color: KSecondaryColorDarkGrey,
-                            ),
-                            SizedBox(width: 10,),
-                            Text(
-                                "Sign Out"
-                            )
-                          ],
+                    onTap: () async {
+                      await model.signOut();
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.exit_to_app,
+                          color: KSecondaryColorDarkGrey,
                         ),
-                      ))
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("Sign Out")
+                      ],
+                    ),
+                  ))
                 ],
               ),
             ),
@@ -170,13 +183,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             controller: _tabController,
             children: [
               FeedsList(),
-
               ChatList(
                 chat: ChatType.Private,
               ),
-
               GroupList(),
-
               ChannelList(),
             ],
           ),

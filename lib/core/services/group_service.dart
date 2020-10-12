@@ -74,7 +74,7 @@ class GroupService {
     _groupCollection.doc(groupId).collection("chats").snapshots().listen((groupChatSnapshots) {
       //  Check if the snapshot has data
       if(groupChatSnapshots.docs.isNotEmpty){
-        var chats = groupChatSnapshots.docs.map((snapshot) => Chat.fromMap(snapshot.data())).toList();
+        var chats = groupChatSnapshots.docs.reversed.map((snapshot) => Chat.fromMap(snapshot.data())).toList();
         _groupChatController.add(chats);
       }
     });
