@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:blueconnectapp/core/models/channel.dart';
+import 'package:blueconnectapp/core/models/chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -7,10 +8,12 @@ class ChannelService {
 
   final CollectionReference _channelCollection = FirebaseFirestore.instance.collection("channels");
 
-  // Create a stream controller that would broadcast our groups
+  // Create a stream controller that would broadcast our channel
   final StreamController<List<Channel>> _channelController = StreamController<List<Channel>>.broadcast();
 
-  // Create Group
+  final StreamController<List<Chat>> _channelChatController = StreamController<List<Chat>>.broadcast();
+
+  // Create Channel
   Future createChannel(Channel channel) async{
     try{
       await _channelCollection.doc(channel.id).set(channel.toJson());
@@ -20,7 +23,7 @@ class ChannelService {
     }
   }
 
-  // Update Group
+  // Update Channel
   Future updateChannel(Channel channel) async {
     try{
       await _channelCollection.doc(channel.id).update(channel.toJson());
@@ -30,7 +33,7 @@ class ChannelService {
     }
   }
 
-  // Get a group
+  // Get a Channel
   Future getChannel({ String channelId}) async {
     try{
       var channelData = await _channelCollection.doc(channelId).get();
@@ -40,8 +43,8 @@ class ChannelService {
     }
   }
 
-  //   Delete a group
-  Future deleteGroup ({ String channelId }) async {
+  //   Delete a channel
+  Future deleteChannel ({ String channelId }) async {
     try{
       await _channelCollection.doc(channelId).delete();
       return true;
@@ -65,7 +68,26 @@ class ChannelService {
     return _channelController.stream;
   }
 
-  Future addChannelChat() async {
+  // Get the channel chats
+  Stream getGroupChats({ String channelId }){
+    // Request for snapshots
+    _channelCollection.doc(channelId).collection("chats").snapshots().listen((groupChatSnapshots) {
+      //  Check if the snapshot has data
+      if(groupChatSnapshots.docs.isNotEmpty){
+        var chats = groupChatSnapshots.docs.reversed.map((snapshot) => Chat.fromMap(snapshot.data())).toList();
+        _channelChatController.add(chats);
+      }
+    });
 
+    return _channelChatController.stream;
+  }
+
+  Future addGroupChat({ Chat chat, String groupId }) async {
+    try{
+      await _channelCollection.doc(groupId).collection("chats").add(chat.toJson());
+      return true;
+    }catch(e){
+      return e.message;
+    }
   }
 }

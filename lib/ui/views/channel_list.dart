@@ -36,11 +36,13 @@ class ChannelList extends StatelessWidget {
                     color: KSecondaryColorLightDark,
                     fontFamily: 'PoppinsSemiBold'),
               ),
-              trailing: model.channels[index].admin != model.user
+              trailing: model.channels[index].admin != model.user &&
+                  model.channels[index].users.contains(model.user)
                   ? FlatButton(
                 color: KPrimaryColor2,
                 onPressed: () {
                   // Add the user to the group
+
                 },
                 child: Text(
                   "JOIN",

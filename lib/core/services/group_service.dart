@@ -52,7 +52,7 @@ class GroupService {
     }
   }
 
-  //   Get all groups and communities [STREAM]
+  //   Get all groups [STREAM]
   Stream getGroups(){
       // Request for the snapshots
       _groupCollection.snapshots().listen((groupSnapshots) {
