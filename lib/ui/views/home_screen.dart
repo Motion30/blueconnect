@@ -1,6 +1,7 @@
 import 'package:blueconnectapp/core/enum/chat_type.dart';
 import 'package:blueconnectapp/core/veiwModels/homeview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
+import 'package:blueconnectapp/ui/views/channel_list.dart';
 import 'package:blueconnectapp/ui/views/groups_list.dart';
 
 import 'base_view.dart';
@@ -176,9 +177,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
               GroupList(),
 
-              ChatList(
-                chat: ChatType.Channel,
-              ),
+              ChannelList(),
             ],
           ),
         ),

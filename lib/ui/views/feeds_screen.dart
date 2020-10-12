@@ -26,8 +26,8 @@ class FeedsList extends StatelessWidget {
                         title: Text(
                           model.feeds[index].title,
                           style: TextStyle(
-                            fontFamily: 'PoppinsRegular',
-                            fontSize: 14,
+                            fontFamily: 'PoppinsBold',
+                            fontSize: 16,
                           ),
                         ),
                         onTap: () {
