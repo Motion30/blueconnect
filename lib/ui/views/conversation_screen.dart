@@ -247,6 +247,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                   //  Send message
                                   if(_message.text.isNotEmpty){
                                       model.sendMessage(message: _message.text);
+                                      _message.clear();
                                   }
                                 },
                               ),

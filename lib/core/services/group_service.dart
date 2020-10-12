@@ -83,6 +83,11 @@ class GroupService {
   }
 
   Future addGroupChat({ Chat chat, String groupId }) async {
-
+    try{
+      await _groupCollection.doc(groupId).collection("chats").add(chat.toJson());
+      return true;
+    }catch(e){
+      return e.message;
+    }
   }
 }
