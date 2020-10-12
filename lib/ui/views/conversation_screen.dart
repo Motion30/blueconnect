@@ -142,7 +142,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                     color: Color(0x22000000),
                                     offset: Offset(1, 1))
                               ],
-                              borderRadius: index % 2 == 0
+                              borderRadius: model.chats[index].sender != model.user
                                   ? BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(10),

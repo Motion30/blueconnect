@@ -125,7 +125,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
                         ),
                         itemCount: model.chats.length,
                         itemBuilder: (context, index) => Container(
-                          alignment: model.chats[index].sender != model.user
+                          alignment: !model.isAdmin
                               ? Alignment.centerLeft
                               : Alignment.centerRight,
                           child: Container(
@@ -142,7 +142,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
                                     color: Color(0x22000000),
                                     offset: Offset(1, 1))
                               ],
-                              borderRadius: index % 2 == 0
+                              borderRadius: !model.isAdmin
                                   ? BorderRadius.only(
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(10),
@@ -184,6 +184,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
                           ),
                         )),
                   )),
+              model.isAdmin ?
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
@@ -226,7 +227,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
                                 keyboardAppearance: Brightness.dark,
                               ),
                             ),
-                            model.isAdmin ? Container(
+                            Container(
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: KPrimaryColor2,
@@ -251,14 +252,14 @@ class _ChannelScreenState extends State<ChannelScreen> {
                                   }
                                 },
                               ),
-                            ) : SizedBox(height: 10,),
+                            ),
                           ],
                         ),
                       ),
                     )
                   ],
                 ),
-              )
+              ) : SizedBox(height: 10,)
             ],
           ),
         ),

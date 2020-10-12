@@ -26,6 +26,8 @@ class ChannelList extends StatelessWidget {
                 "assets/images/empty.png",
               )),
         )
+            :  model.state == ViewState.Busy ?
+        Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),)
             : ListView.separated(
             separatorBuilder: (context, index) => Divider(),
             itemCount: model.channels.length,
