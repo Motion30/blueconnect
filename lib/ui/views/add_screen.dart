@@ -225,11 +225,19 @@ class _AddScreenState extends State<AddScreen> {
                 RoundButton(
                   btnTitle: "CREATE ${widget.category}",
                   onTap: () async{
-                    // switch(widget.category){
-                    //   case 'Group':
-                    //
-                    // }
-                    await model.addGroup(name: _name.text, description: _description.text, logo: _logo.text);
+                    switch(widget.category){
+                        case 'Group':
+                            await model.addGroup(name: _name.text, description: _description.text, logo: _logo.text);
+                            break;
+                        case 'Channel':
+                            await model.addChannel(name: _name.text, description: _description.text, logo: _logo.text);
+                            break;
+                        case 'Community':
+                            await model.addCommunity(name: _name.text, description: _description.text, logo: _logo.text);
+                            break;
+                        default:
+                            break;
+                    }
                   },
                 ),
               ],

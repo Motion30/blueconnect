@@ -52,17 +52,17 @@ class CommunityService {
 
   //   Get all communities [STREAM]
   Stream getCommunities(){
-    // Request for the snapshots
-    _communityCollection.snapshots().listen((communitySnapshots) {
-      //Check if it has data
-      if(communitySnapshots.docs.isNotEmpty){
-        var community = communitySnapshots.docs.map((snapshot) => Community.fromMap(snapshot.data())).toList();
-        _communityController.add(community);
-      }
-    });
+      // Request for the snapshots
+      _communityCollection.snapshots().listen((communitySnapshots) {
+        //Check if it has data
+        if(communitySnapshots.docs.isNotEmpty){
+          var community = communitySnapshots.docs.map((snapshot) => Community.fromMap(snapshot.data())).toList();
+          _communityController.add(community);
+        }
+      });
 
-    // Return the stream underlying our _communityController
-    return _communityController.stream;
+      // Return the stream underlying our _communityController
+      return _communityController.stream;
   }
 
   Future addCommunityChat() async {
