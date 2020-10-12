@@ -1,3 +1,4 @@
+import 'package:blueconnectapp/core/constants/route_paths.dart';
 import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/models/community.dart';
 import 'package:blueconnectapp/core/models/group.dart';
@@ -50,6 +51,7 @@ class GroupViewModel extends BaseModel{
   }
 
   void navigateToGroupChat(){
-    _navigationService.navigateTo('');
+    _navigationService.navigateTo(Routes.CHAT_SCREEN);
   }
+
 }

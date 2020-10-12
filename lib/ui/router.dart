@@ -1,4 +1,5 @@
 import 'package:blueconnectapp/ui/views/add_screen.dart';
+import 'package:blueconnectapp/ui/views/conversation_screen.dart';
 import 'package:blueconnectapp/ui/views/create_screen.dart';
 import 'package:blueconnectapp/ui/views/forgotpassword_screen.dart';
 import 'package:blueconnectapp/ui/views/gettingstarted_screen.dart';
@@ -54,6 +55,9 @@ class XRouter {
       case Routes.WEB_SCREEN:
         String arguments = settings.arguments;
         return MaterialPageRoute(builder: (_) => WebScreen(url: arguments,));
+
+      case Routes.CHAT_SCREEN:
+          return MaterialPageRoute(builder: (_) => ConversationScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

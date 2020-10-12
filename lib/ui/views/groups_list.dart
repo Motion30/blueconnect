@@ -55,8 +55,11 @@ class GroupList extends StatelessWidget {
                         //  Go to the chat screen
                         if (model.combined[index].admin == model.user ||
                             model.combined[index].users.contains(model.user)) {
-
+                              model.navigateToGroupChat();
                         }
+
+                      //  Else if the group is closed or paid open another page
+
                       },
                       leading: CircleAvatar(
                         radius: 30,

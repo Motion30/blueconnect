@@ -7,7 +7,7 @@ import 'package:blueconnectapp/ui/views/groups_list.dart';
 import 'base_view.dart';
 import 'package:flutter/material.dart';
 
-import 'chat_screen.dart';
+import 'chat_list.dart';
 import 'feeds_screen.dart';
 
 class HomeScreen extends StatefulWidget {
