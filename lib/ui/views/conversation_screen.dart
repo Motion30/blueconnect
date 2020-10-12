@@ -39,7 +39,9 @@ class ConversationScreen extends StatelessWidget {
           title: InkWell(
             highlightColor: KSecondaryColorGrey.withOpacity(0.03),
             // splashColor: KSecondaryColorGrey,
-            onTap: () {},
+            onTap: () {
+            //   Show the group details
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
               child: Text(

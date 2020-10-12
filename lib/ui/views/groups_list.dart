@@ -67,11 +67,32 @@ class GroupList extends StatelessWidget {
                           model.combined[index].logo,
                         ),
                       ),
-                      subtitle: Text(
-                        model.combined[index].description,
-                        style: TextStyle(
-                            color: KSecondaryColorLightDark,
-                            fontFamily: 'PoppinsRegular'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            model.combined[index].description,
+                            style: TextStyle(
+                                color: KSecondaryColorLightDark,
+                                fontFamily: 'PoppinsRegular'),
+                          ),
+
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.all(Radius.circular(25))
+                            ),
+                            child: Text(
+                              model.combined[index].type.toString().toUpperCase(),
+                              style: TextStyle(
+                                color: KPrimaryWhite,
+                                fontFamily: 'PoppinsRegular',
+                                fontSize: 10
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     )),
       ),

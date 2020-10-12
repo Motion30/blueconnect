@@ -7,6 +7,7 @@ class Community{
   final String logo;
   final List<String> users;
   final String admin;
+  final String type;
 
   Community({
     @required this.id,
@@ -15,6 +16,7 @@ class Community{
     @required this.users,
     @required this.admin,
     @required this.logo,
+    this.type = 'community',
   });
 
   Community.fromMap(Map<String, dynamic> data)
@@ -23,6 +25,7 @@ class Community{
         description = data['description'],
         users = [...data['users']],
         admin = data['admin'],
+        type = data['type'],
         logo  = data['logo'];
 
   Map<String, dynamic> toJson(){
@@ -33,6 +36,7 @@ class Community{
       'description' : description,
       'users' : users,
       'admin' : admin,
+      'type' :  'community',
     };
   }
 }

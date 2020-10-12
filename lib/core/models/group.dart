@@ -12,6 +12,7 @@ class Group{
   final bool premium;
   final String groupKey;
   final String price;
+  final String type;
 
   Group({
     @required this.id,
@@ -22,6 +23,7 @@ class Group{
     @required this.public,
     @required this.premium,
     @required this.logo,
+    this.type = 'group',
     this.groupKey,
     this.groupLink,
     this.price
@@ -38,6 +40,7 @@ class Group{
       premium = data['premium'],
       groupKey = data['groupKey'],
       groupLink = data['groupLink'],
+      type = data["type"],
       price = '${data['price']}';
 
   Map<String, dynamic> toJson(){
@@ -50,6 +53,7 @@ class Group{
       'admin' : admin,
       'public' : public,
       'premium' : premium,
+      'type' : 'group',
       'groupKey' : groupKey,
       'groupLink' : groupLink,
       'price' : price,
