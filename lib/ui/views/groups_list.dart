@@ -16,7 +16,7 @@ class GroupList extends StatelessWidget {
             ? MediaQuery.of(context).size.height
             : null,
         padding: EdgeInsets.symmetric(vertical: 10),
-        child: model.groups.length == 0
+        child: model.combined.length == 0
             ? Center(
                 child: Image(
                     width: 250,
@@ -28,15 +28,15 @@ class GroupList extends StatelessWidget {
               )
             : ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
-                itemCount: model.groups.length,
+                itemCount: model.combined.length,
                 itemBuilder: (context, index) => ListTile(
                       title: Text(
-                        model.groups[index].name,
+                        model.combined[index].name,
                         style: TextStyle(
                             color: KSecondaryColorLightDark,
                             fontFamily: 'PoppinsSemiBold'),
                       ),
-                      trailing: model.groups[index].admin != model.user
+                      trailing: model.combined[index].admin != model.user
                           ? FlatButton(
                               color: KPrimaryColor2,
                               onPressed: () {
@@ -53,19 +53,19 @@ class GroupList extends StatelessWidget {
                           : null,
                       onTap: () {
                         //  Go to the chat screen
-                        if (model.groups[index].admin == model.user ||
-                            model.groups[index].users.contains(model.user)) {
+                        if (model.combined[index].admin == model.user ||
+                            model.combined[index].users.contains(model.user)) {
 
                         }
                       },
                       leading: CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(
-                          model.groups[index].logo,
+                          model.combined[index].logo,
                         ),
                       ),
                       subtitle: Text(
-                        model.groups[index].description,
+                        model.combined[index].description,
                         style: TextStyle(
                             color: KSecondaryColorLightDark,
                             fontFamily: 'PoppinsRegular'),

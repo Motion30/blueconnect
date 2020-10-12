@@ -43,10 +43,11 @@ class _AddScreenState extends State<AddScreen> {
             color: KPrimaryWhite,
           ),
           title: Text(
-            "Add ${widget.category.toUpperCase()}",
+            "Create ${widget.category}",
             style: TextStyle(
               fontFamily: 'PoppinsRegular',
               color: KPrimaryWhite,
+              fontSize: 18,
             ),
           ),
         ),
@@ -119,10 +120,10 @@ class _AddScreenState extends State<AddScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                InputLabel(
+                widget.category != 'Community'? InputLabel(
                   label: "VISIBILITY",
-                ),
-                Container(
+                ): Container(),
+                widget.category != 'Community'? Container(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -167,14 +168,14 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                     ],
                   ),
-                ),
+                ): Container(),
                 SizedBox(
                   height: 30,
                 ),
-                InputLabel(
+                widget.category != 'Community'? InputLabel(
                   label: "PREMIUM",
-                ),
-                Container(
+                ): Container(),
+                widget.category != 'Community'? Container(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +218,8 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                     ],
                   ),
-                ),
+                ): Container(),
+
                 SizedBox(
                   height: 50,
                 ),

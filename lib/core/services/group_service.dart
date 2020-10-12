@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:blueconnectapp/core/models/group.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class GroupService {
 
   final CollectionReference _groupCollection = FirebaseFirestore.instance.collection("groups");
@@ -50,7 +49,7 @@ class GroupService {
     }
   }
 
-  //   Get all groups [STREAM]
+  //   Get all groups and communities [STREAM]
   Stream getGroups(){
       // Request for the snapshots
       _groupCollection.snapshots().listen((groupSnapshots) {

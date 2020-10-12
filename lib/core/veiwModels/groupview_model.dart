@@ -1,6 +1,8 @@
 import 'package:blueconnectapp/core/enum/view_state.dart';
+import 'package:blueconnectapp/core/models/community.dart';
 import 'package:blueconnectapp/core/models/group.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
+import 'package:blueconnectapp/core/services/community_service.dart';
 import 'package:blueconnectapp/core/services/group_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/locator.dart';
@@ -9,9 +11,15 @@ import 'base_model.dart';
 
 class GroupViewModel extends BaseModel{
 
-  List<Group> groups = [];
+  List<Group> _groups = [];
+  List<Community> _communities = [];
+
+  List<dynamic> get combined {
+    return [_communities,_groups].expand((element) => element).toList();
+  }
 
   GroupService _groupService = locator<GroupService>();
+  CommunityService _communityService = locator<CommunityService>();
   NavigationService _navigationService = locator<NavigationService>();
   AuthenticationService _authenticationService = locator<AuthenticationService>();
 
@@ -20,10 +28,20 @@ class GroupViewModel extends BaseModel{
   void listenToGroups(){
     setState(ViewState.Busy);
 
+    // Listen on the group service
     _groupService.getGroups().listen((groupData) {
       List<Group> updatedGroups = groupData;
       if(updatedGroups != null  && updatedGroups.length > 0){
-        groups = updatedGroups;
+        _groups = updatedGroups;
+        notifyListeners();
+      }
+    });
+
+    // Listen on the community Service
+    _communityService.getCommunities().listen((communityData) {
+      List<Community> updatedGroups = communityData;
+      if(updatedGroups != null  && updatedGroups.length > 0){
+        _communities = updatedGroups;
         notifyListeners();
       }
     });
