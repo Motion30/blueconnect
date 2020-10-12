@@ -24,6 +24,7 @@ class ConversationViewModel extends BaseModel{
 
   // Navigate back
   void navigateBack(){
+    chats.clear();
     _navigationService.goBack();
   }
 
@@ -34,31 +35,51 @@ class ConversationViewModel extends BaseModel{
   }
 
   // Send message
-  Future sendCommunityMessage({ String message }) async{
-    var communityId = _groupViewModel.combined[groupIndex].id;
-    var result = await _communityService.addCommunityChat(chat: Chat(
+  Future sendMessage({String message}) async {
+    if(_groupViewModel.combined[groupIndex].type == 'community'){
+      var communityId = _groupViewModel.combined[groupIndex].id;
+      await _communityService.addCommunityChat(chat: Chat(
+          message: message,
+          sender: _authenticationService.currentUser.id,
+          timeSent: DateTime.now(),
+          isImage: false
+      ),
+          communityId: communityId
+      );
+    }else{
+      var groupId = _groupViewModel.combined[groupIndex].id;
+      await _groupService.addGroupChat(chat: Chat(
         message: message,
         sender: _authenticationService.currentUser.id,
         timeSent: DateTime.now(),
-        isImage: false
-        ),
-        communityId: communityId
-    );
+        isImage: false,
+      ),
+          groupId: groupId
+      );
+    }
   }
 
-  void pullCommunityChats(){
-      var communityId = _groupViewModel.combined[groupIndex].id;
-      _communityService.getCommunityChats(communityId: communityId).listen((communityChatData) {
-        List<Chat> updatedChats = communityChatData;
-        if(updatedChats != null  && updatedChats.length > 0){
-          chats = [...updatedChats.reversed];
-          notifyListeners();
-        }
-      });
-  }
-
-  void pullGroupChats(){
-
+  void pullChats(){
+      // Check if it's a community or a group
+      if(_groupViewModel.combined[groupIndex].type == 'community'){
+        var communityId = _groupViewModel.combined[groupIndex].id;
+        _communityService.getCommunityChats(communityId: communityId).listen((communityChatData) {
+          List<Chat> updatedChats = communityChatData;
+          if(updatedChats != null  && updatedChats.length > 0){
+            chats = [...updatedChats.reversed];
+            notifyListeners();
+          }
+        });
+      }else{
+        var groupId = _groupViewModel.combined[groupIndex].id;
+        _groupService.getGroupChats(groupId: groupId).listen((groupChatData) {
+            List<Chat> updatedChats = groupChatData;
+            if(updatedChats != null && updatedChats.length > 0 ){
+              chats = [...updatedChats.reversed];
+              notifyListeners();
+            }
+        });
+      }
   }
 
 }

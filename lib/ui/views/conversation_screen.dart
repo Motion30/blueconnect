@@ -32,7 +32,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       onModelReady: (model){
         model.setGroupIndex(widget.groupIndex);
         // Pull the community chats
-        model.pullCommunityChats();
+        model.pullChats();
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
@@ -246,7 +246,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                                 onPressed: () {
                                   //  Send message
                                   if(_message.text.isNotEmpty){
-                                      model.sendCommunityMessage(message: _message.text);
+                                      model.sendMessage(message: _message.text);
                                   }
                                 },
                               ),

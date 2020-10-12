@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:blueconnectapp/core/models/chat.dart';
 import 'package:blueconnectapp/core/models/group.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,6 +9,8 @@ class GroupService {
 
   // Create a stream controller that would broadcast our groups
   final StreamController<List<Group>> _groupController = StreamController<List<Group>>.broadcast();
+
+  final StreamController<List<Chat>> _groupChatController = StreamController<List<Chat>>.broadcast();
 
   // Create Group
   Future createGroup(Group group) async{
@@ -65,7 +68,21 @@ class GroupService {
       return _groupController.stream;
   }
 
-  Future addGroupChat() async {
+  // Get the group chats
+  Stream getGroupChats({ String groupId }){
+    // Request for snapshots
+    _groupCollection.doc(groupId).collection("chats").snapshots().listen((groupChatSnapshots) {
+      //  Check if the snapshot has data
+      if(groupChatSnapshots.docs.isNotEmpty){
+        var chats = groupChatSnapshots.docs.map((snapshot) => Chat.fromMap(snapshot.data())).toList();
+        _groupChatController.add(chats);
+      }
+    });
+
+    return _groupChatController.stream;
+  }
+
+  Future addGroupChat({ Chat chat, String groupId }) async {
 
   }
 }
