@@ -43,7 +43,7 @@ class _AddScreenState extends State<AddScreen> {
             color: KPrimaryWhite,
           ),
           title: Text(
-            "Add ${widget.category}",
+            "Add ${widget.category.toUpperCase()}",
             style: TextStyle(
               fontFamily: 'PoppinsRegular',
               color: KPrimaryWhite,
@@ -223,7 +223,7 @@ class _AddScreenState extends State<AddScreen> {
                 ),
 
                 RoundButton(
-                  btnTitle: "CREATE ${widget.category}",
+                  btnTitle: "CREATE ${widget.category.toUpperCase()}",
                   onTap: () async{
                     switch(widget.category){
                         case 'Group':
@@ -238,6 +238,8 @@ class _AddScreenState extends State<AddScreen> {
                         default:
                             break;
                     }
+                    // Pop the context and go back to the home screen.
+                    model.navigateBack();
                   },
                 ),
               ],

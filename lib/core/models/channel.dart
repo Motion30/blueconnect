@@ -7,10 +7,10 @@ class Channel{
   final String logo;
   final List<String> users;
   final String admin;
-  final String groupLink;
+  final String channelLink;
   final bool public;
   final bool premium;
-  final String groupKey;
+  final String channelKey;
   final String price;
 
   Channel({
@@ -22,8 +22,8 @@ class Channel{
     @required this.public,
     @required this.premium,
     @required this.logo,
-    this.groupKey,
-    this.groupLink,
+    this.channelKey,
+    this.channelLink,
     this.price
   });
 
@@ -36,8 +36,8 @@ class Channel{
         logo  = data['logo'],
         public = data['public'],
         premium = data['premium'],
-        groupKey = data['groupKey'],
-        groupLink = data['groupLink'],
+        channelKey = data['channelKey'],
+        channelLink = data['channelLink'],
         price = '${data['price']}';
 
   Map<String, dynamic> toJson(){
@@ -50,8 +50,8 @@ class Channel{
       'admin' : admin,
       'public' : public,
       'premium' : premium,
-      'groupKey' : groupKey,
-      'groupLink' : groupLink,
+      'channelKey' : channelKey,
+      'channelLink' : channelLink,
       'price' : price,
     };
   }
