@@ -69,7 +69,7 @@ class ChannelService {
   }
 
   // Get the channel chats
-  Stream getGroupChats({ String channelId }){
+  Stream getChannelChats({ String channelId }){
     // Request for snapshots
     _channelCollection.doc(channelId).collection("chats").snapshots().listen((groupChatSnapshots) {
       //  Check if the snapshot has data
@@ -82,9 +82,9 @@ class ChannelService {
     return _channelChatController.stream;
   }
 
-  Future addGroupChat({ Chat chat, String groupId }) async {
+  Future addChannelChat({ Chat chat, String channelId }) async {
     try{
-      await _channelCollection.doc(groupId).collection("chats").add(chat.toJson());
+      await _channelCollection.doc(channelId).collection("chats").add(chat.toJson());
       return true;
     }catch(e){
       return e.message;

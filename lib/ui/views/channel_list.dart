@@ -40,9 +40,9 @@ class ChannelList extends StatelessWidget {
                   model.channels[index].users.contains(model.user)
                   ? FlatButton(
                 color: KPrimaryColor2,
-                onPressed: () {
-                  // Add the user to the group
-
+                onPressed: () async{
+                  // Add the user to the channel
+                  await model.addUserToChannel(channelIndex: index);
                 },
                 child: Text(
                   "JOIN",
@@ -57,7 +57,10 @@ class ChannelList extends StatelessWidget {
                 //  Go to the chat screen
                 if (model.channels[index].admin == model.user ||
                     model.channels[index].users.contains(model.user)) {
-
+                      model.navigateToChannelChat(
+                          channelIndex: index,
+                          chatTitle: model.channels[index].name,
+                          imageSrc: model.channels[index].logo);
                 }
               },
               leading: CircleAvatar(

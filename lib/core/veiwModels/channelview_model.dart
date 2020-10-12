@@ -33,6 +33,24 @@ class ChannelViewModel extends BaseModel{
   }
 
   void navigateToChannelChat({ String chatTitle, String imageSrc, int channelIndex }){
-    _navigationService.navigateTo(Routes.CHANNEL_SCREEN,arguments: [chatTitle, imageSrc, channelIndex]);
+    _navigationService.navigateTo( Routes.CHANNEL_SCREEN, arguments: [chatTitle, imageSrc, channelIndex] );
+  }
+
+  Future addUserToChannel({ int channelIndex }) async{
+    setState(ViewState.Busy);
+    // Add the user to the group
+    channels[channelIndex].users.add(_authenticationService.currentUser.id);
+    // Check if the channel is a private group or a paid group!
+    await _channelService.updateChannel(channels[channelIndex]);
+
+    var chatTitle = channels[channelIndex].name;
+    var imageSrc = channels[channelIndex].logo;
+
+    setState(ViewState.Idle);
+
+    _navigationService.navigateTo(
+        Routes.CHANNEL_SCREEN,
+        arguments: [chatTitle, imageSrc, channelIndex]
+    );
   }
 }

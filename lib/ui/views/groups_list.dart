@@ -42,9 +42,9 @@ class GroupList extends StatelessWidget {
                           !model.combined[index].users.contains(model.user)
                           ? FlatButton(
                               color: KPrimaryColor2,
-                              onPressed: () {
+                              onPressed: () async{
                                 // Add the user to the group
-                                model.addUserToGroup(groupIndex: index );
+                                await model.addUserToGroup(groupIndex: index );
                               },
                               child: Text(
                                 "JOIN",
