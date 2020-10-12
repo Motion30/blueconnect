@@ -26,7 +26,9 @@ class GroupList extends StatelessWidget {
                       "assets/images/empty.png",
                     )),
               )
-            : ListView.separated(
+            : model.state == ViewState.Busy ?
+                  Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),)
+                : ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: model.combined.length,
                 itemBuilder: (context, index) => ListTile(
@@ -42,6 +44,7 @@ class GroupList extends StatelessWidget {
                               color: KPrimaryColor2,
                               onPressed: () {
                                 // Add the user to the group
+                                model.addUserToGroup(groupIndex: index );
                               },
                               child: Text(
                                 "JOIN",
@@ -63,7 +66,7 @@ class GroupList extends StatelessWidget {
                               );
                         }
 
-                      //  Else if the group is closed or paid open another page
+                       // Else if the group is closed or paid open another page
 
                       },
                       leading: CircleAvatar(

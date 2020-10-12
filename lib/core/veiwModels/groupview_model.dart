@@ -57,4 +57,25 @@ class GroupViewModel extends BaseModel{
     );
   }
 
+  Future addUserToGroup({ int groupIndex }) async{
+    setState(ViewState.Busy);
+    // Add the user to the group
+    combined[groupIndex].users.add(_authenticationService.currentUser.id);
+    // Check if the group is a private group or a paid group!
+    if(combined[groupIndex].type == 'community'){
+        await _communityService.updateCommunity(combined[groupIndex]);
+    }else{
+        await _groupService.updateGroup(combined[groupIndex]);
+    }
+    var chatTitle = combined[groupIndex].name;
+    var imageSrc = combined[groupIndex].logo;
+
+    setState(ViewState.Idle);
+
+    _navigationService.navigateTo(
+        Routes.CHAT_SCREEN,
+        arguments: [chatTitle, imageSrc, groupIndex]
+    );
+  }
+
 }
