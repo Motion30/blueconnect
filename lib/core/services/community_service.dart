@@ -70,7 +70,7 @@ class CommunityService {
   
   Stream getCommunityChats({ String communityId }){
     // Request for the snapshots
-    _communityCollection.doc(communityId).collection("chats").snapshots().listen((communityChatSnapshots) {
+    _communityCollection.doc(communityId).collection("chats").orderBy("timeSent", descending: false).snapshots().listen((communityChatSnapshots) {
       // Check if it has data
       if(communityChatSnapshots.docs.isNotEmpty){
         var chats = communityChatSnapshots.docs.map((snapshot) => Chat.fromMap(snapshot.data())).toList();

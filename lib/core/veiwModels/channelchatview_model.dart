@@ -53,7 +53,8 @@ class ChannelChatViewModel extends BaseModel{
       _channelService.getChannelChats(channelId: channelId).listen((channelChatData) {
         List<Chat> updatedChats = channelChatData;
         if(updatedChats != null  && updatedChats.length > 0){
-          chats = [...updatedChats.reversed];
+          // chats = [...updatedChats.reversed];
+          chats = updatedChats;
           notifyListeners();
         }
       });

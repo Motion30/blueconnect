@@ -66,7 +66,8 @@ class ConversationViewModel extends BaseModel{
         _communityService.getCommunityChats(communityId: communityId).listen((communityChatData) {
           List<Chat> updatedChats = communityChatData;
           if(updatedChats != null  && updatedChats.length > 0){
-            chats = [...updatedChats.reversed];
+            // chats = [...updatedChats.reversed];
+            chats = updatedChats;
             notifyListeners();
           }
         });
@@ -75,7 +76,8 @@ class ConversationViewModel extends BaseModel{
         _groupService.getGroupChats(groupId: groupId).listen((groupChatData) {
             List<Chat> updatedChats = groupChatData;
             if(updatedChats != null && updatedChats.length > 0 ){
-              chats = [...updatedChats.reversed];
+              // chats = [...updatedChats.reversed];
+              chats = updatedChats;
               notifyListeners();
             }
         });
