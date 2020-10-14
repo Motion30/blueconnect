@@ -27,18 +27,44 @@ class _HomeScreenState extends State<HomeScreen>
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text(
-            "Blue Connect",
-            style:
-                TextStyle(color: KPrimaryWhite, fontFamily: 'PoppinsRegular'),
-          ),
+          leading: model.isSearching? IconButton(
+            icon: Icon(
+              Icons.cancel,
+              color: KPrimaryWhite,
+            ),
+            onPressed: (){
+              model.endSearching();
+            },
+          ): null,
+          title: !model.isSearching
+              ? Text(
+                  "Blue Connect",
+                  style: TextStyle(
+                      color: KPrimaryWhite, fontFamily: 'PoppinsRegular'),
+                )
+              : TextFormField(
+                  style: TextStyle(
+                    color: KPrimaryWhite,
+                    fontFamily: 'PoppinsRegular',
+                  ),
+                  decoration: InputDecoration(
+                    hintText: 'Search for user',
+                    hintStyle: TextStyle(
+                      color: KPrimaryWhite,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
           actions: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: IconButton(
                 splashRadius: 20,
-                onPressed: (){
+                onPressed: () {
                   // Open the search field
+                  model.startSearching();
                 },
                 icon: Icon(
                   Icons.search,

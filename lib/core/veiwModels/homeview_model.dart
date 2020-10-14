@@ -10,6 +10,20 @@ class HomeViewModel extends BaseModel{
   NavigationService _navigationService = locator<NavigationService>();
   AuthenticationService _authenticationService = locator<AuthenticationService>();
 
+  bool _searching = false;
+
+  bool get isSearching => _searching;
+
+  void startSearching(){
+    _searching = true;
+    notifyListeners();
+  }
+
+  void endSearching(){
+    _searching = false;
+    notifyListeners();
+  }
+
    void navigateToCreateScreen(){
      _navigationService.navigateTo(Routes.CREATE_SCREEN);
    }
@@ -28,4 +42,5 @@ class HomeViewModel extends BaseModel{
    void navigateToSettings(){
      _navigationService.navigateTo(Routes.SETTINGS_SCREEN);
    }
+
 }
