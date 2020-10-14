@@ -134,7 +134,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
-                              color: KPrimaryColor1.withOpacity(.7),
+                              color: KPrimaryColor2.withOpacity(.7),
                               boxShadow: [
                                 BoxShadow(
                                     blurRadius: .5,
