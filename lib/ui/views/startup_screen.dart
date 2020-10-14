@@ -29,7 +29,8 @@ class StartUpScreen extends StatelessWidget {
               Text(
                 "Blue Connect",
                 style: TextStyle(
-                    color: Color(0xFF33BB80),
+                    // color: Color(0xFF33BB80),
+                    color: KPrimaryColor2,
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
                     fontFamily: "PoppinsRegular"

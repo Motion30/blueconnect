@@ -53,27 +53,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: 50,
-                      child: TextFormField(),
-                    ),
-                    Container(
-                      width: 50,
-                      child: TextFormField(),
-                    ),
-                    Container(
-                      width: 50,
-                      child: TextFormField(),
-                    ),
-                    Container(
-                      width: 50,
-                      child: TextFormField(),
-                    ),
-                  ],
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
                   height: 80,
