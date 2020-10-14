@@ -1,4 +1,5 @@
 import 'package:blueconnectapp/core/enum/chat_type.dart';
+import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/veiwModels/homeview_model.dart';
 import 'package:blueconnectapp/ui/shared/colors.dart';
 import 'package:blueconnectapp/ui/views/channel_list.dart';
@@ -18,10 +19,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  TextEditingController _searchQuery = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
+      onModelDisposed: (model){
+        _searchQuery.dispose();
+      },
       onModelReady: (model) {
         _tabController = TabController(length: 4, vsync: this, initialIndex: 1);
       },
@@ -33,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: KPrimaryWhite,
             ),
             onPressed: (){
+              // End searching
               model.endSearching();
             },
           ): null,
@@ -43,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
                       color: KPrimaryWhite, fontFamily: 'PoppinsRegular'),
                 )
               : TextFormField(
+                  controller: _searchQuery,
                   style: TextStyle(
                     color: KPrimaryWhite,
                     fontFamily: 'PoppinsRegular',
@@ -63,11 +70,13 @@ class _HomeScreenState extends State<HomeScreen>
               child: IconButton(
                 splashRadius: 20,
                 onPressed: () {
-                  // Open the search field
-                  model.startSearching();
+                  // Open the search field if is searching is not enabled
+                  if(!model.isSearching) model.startSearching();
+                  if(_searchQuery.text.isNotEmpty) model.searchForUser(username: _searchQuery.text);
                 },
                 icon: Icon(
-                  Icons.search,
+                  !model.isSearching ?
+                  Icons.search : Icons.send,
                   color: KPrimaryWhite,
                 ),
               ),
@@ -145,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ],
           backgroundColor: KPrimaryColor2,
-          bottom: TabBar(
+          bottom: !model.isSearching? TabBar(
               controller: _tabController,
               indicatorColor: KPrimaryWhite,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -202,10 +211,12 @@ class _HomeScreenState extends State<HomeScreen>
                         fontSize: 13),
                   ),
                 )
-              ]),
+              ]) :  null,
         ),
         body: Container(
-          child: TabBarView(
+          height: model.state == ViewState.Busy ?  MediaQuery.of(context).size.height : null,
+          child: !model.isSearching?
+          TabBarView(
             controller: _tabController,
             children: [
               FeedsList(),
@@ -215,9 +226,26 @@ class _HomeScreenState extends State<HomeScreen>
               GroupList(),
               ChannelList(),
             ],
+          )
+          : model.state == ViewState.Busy?
+            Center(
+              child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),
+            )
+          :ListView.separated(
+            itemBuilder: (context, index) => ListTile(
+              leading: CircleAvatar(
+                child: Text('A'),
+                foregroundColor: KSecondaryColorGrey,
+                backgroundColor: KPrimaryColor2,
+              ),
+              title: Text("User $index"),
+            ),
+            separatorBuilder: (context, index) => Divider(),
+            itemCount: 5,
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: !model.isSearching?
+        FloatingActionButton(
           backgroundColor: KPrimaryColor2,
           onPressed: () {
             model.navigateToCreateScreen();
@@ -226,7 +254,8 @@ class _HomeScreenState extends State<HomeScreen>
             Icons.add,
             color: KPrimaryWhite,
           ),
-        ),
+        )
+        : null,
       ),
     );
   }

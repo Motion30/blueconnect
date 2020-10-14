@@ -2,6 +2,7 @@ import 'package:blueconnectapp/core/constants/route_paths.dart';
 import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
+import 'package:blueconnectapp/core/services/user_service.dart';
 import 'package:blueconnectapp/locator.dart';
 
 import 'base_model.dart';
@@ -9,6 +10,7 @@ import 'base_model.dart';
 class HomeViewModel extends BaseModel{
   NavigationService _navigationService = locator<NavigationService>();
   AuthenticationService _authenticationService = locator<AuthenticationService>();
+  UserService _userService = locator<UserService>();
 
   bool _searching = false;
 
@@ -43,4 +45,9 @@ class HomeViewModel extends BaseModel{
      _navigationService.navigateTo(Routes.SETTINGS_SCREEN);
    }
 
+   Future searchForUser ({ String username }) async {
+      setState(ViewState.Busy);
+      await _userService.searchForUser(username: username);
+      setState(ViewState.Idle);
+   }
 }
