@@ -28,12 +28,14 @@ class ChatService {
   Future initiatePersonalChat({ String chatId, ChatSet chatSet }) async {
     try{
         // Check if the chat has been created before and if not
-        if(await getChat(chatId: chatId)){
+        if(!await getChat(chatId: chatId)){
             // Create the chat
-            await _chatCollection.doc(chatId).set(chatSet.toJson());
+           await _chatCollection.doc(chatId).set(chatSet.toJson());
         }
+        print('Entered here');
         return true;
     }catch(e){
+      print(e.toString());
       return e.message;
     }
   }
@@ -42,8 +44,9 @@ class ChatService {
   Future getChat({ String chatId }) async{
     try{
       var chatData = await _chatCollection.doc(chatId).get();
-      return chatData.data().length > 0;
+      return chatData.data() != null && chatData.data().length > 0;
     }catch(e){
+      print(e.toString());
       return e.message;
     }
   }

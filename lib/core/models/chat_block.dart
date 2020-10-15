@@ -12,7 +12,7 @@ class ChatSet{
     : chatId  =   data['chatId'],
       user1   =   data['user1'],
       user2   =   data['user2'],
-      users   =   data['users'];
+      users   =   [...data['users']];
 
   Map<String, dynamic> toJson(){
     return {
