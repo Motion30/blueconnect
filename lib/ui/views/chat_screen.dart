@@ -155,6 +155,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
+                                  Text(model.chats[index].sender != model.user
+                                      ? model.chats[index].username
+                                      : 'You',
+                                    style: TextStyle(
+                                      color: KPrimaryWhite,
+                                      fontFamily: 'PoppinsRegular'
+                                    ),
+                                  ),
+                                  Divider(),
                                   Text(
                                     model.chats[index].message,
                                     textAlign: model.chats[index].sender != model.user

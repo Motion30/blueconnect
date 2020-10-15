@@ -50,7 +50,11 @@ class ChatService {
 
   // Load one on one chats
   Stream loadChats ({ String chatId }){
-    _chatCollection.doc(chatId).collection("chats").orderBy("timeSent", descending: false).snapshots().listen((personalChatSnapshots) {
+    _chatCollection.doc(chatId)
+        .collection("chats")
+        .orderBy("timeSent", descending: false)
+        .snapshots()
+        .listen((personalChatSnapshots) {
       if(personalChatSnapshots.docs.isNotEmpty){
         var chats = personalChatSnapshots.docs.map((snapshot) => Chat.fromMap(snapshot.data())).toList();
         _personalChatController.add(chats);

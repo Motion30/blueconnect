@@ -160,6 +160,10 @@ class _ChannelScreenState extends State<ChannelScreen> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
+                                Text(model.chats[index].sender != model.user
+                                    ? model.chats[index].username
+                                    : 'You'),
+                                Divider(),
                                 Text(
                                   model.chats[index].message,
                                   textAlign: model.chats[index].sender != model.user
