@@ -227,9 +227,7 @@ class _HomeScreenState extends State<HomeScreen>
                   controller: _tabController,
                   children: [
                     FeedsList(),
-                    ChatList(
-                      chat: ChatType.Private,
-                    ),
+                    ChatList(),
                     GroupList(),
                     ChannelList(),
                   ],

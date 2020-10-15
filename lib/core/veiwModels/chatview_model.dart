@@ -1,3 +1,5 @@
+import 'package:blueconnectapp/core/constants/route_paths.dart';
+import 'package:blueconnectapp/core/enum/view_state.dart';
 import 'package:blueconnectapp/core/models/chat_block.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/chat_service.dart';
@@ -20,6 +22,8 @@ class ChatViewModel extends BaseModel{
   }
 
   void pullChats(){
+    setState(ViewState.Busy);
+
     _chatService.getActiveChats(userId: _authenticationService.currentUser.id).listen((chatData) {
       List<ChatSet> updatedChats = chatData;
       if(updatedChats != null  && updatedChats.length > 0){
@@ -27,5 +31,11 @@ class ChatViewModel extends BaseModel{
         notifyListeners();
       }
     });
+
+    setState(ViewState.Idle);
+  }
+
+  void navigateToChatScreen({ String username, String imageSrc }){
+    _navigationService.navigateTo(Routes.PERSONAL_CHAT_SCREEN, arguments: [username, imageSrc]);
   }
 }

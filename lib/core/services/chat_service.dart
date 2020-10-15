@@ -8,9 +8,9 @@ class ChatService {
 
   final CollectionReference _chatCollection = FirebaseFirestore.instance.collection("chats");
 
-  final StreamController<List<ChatSet>> _chatController = StreamController<List<ChatSet>>();
+  final StreamController<List<ChatSet>> _chatController = StreamController<List<ChatSet>>.broadcast();
 
-  final StreamController<List<Chat>> _personalChatController = StreamController<List<Chat>>();
+  final StreamController<List<Chat>> _personalChatController = StreamController<List<Chat>>.broadcast();
 
   // Get the active chats
   Stream getActiveChats ({ String userId }){

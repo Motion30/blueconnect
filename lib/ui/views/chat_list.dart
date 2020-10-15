@@ -6,9 +6,6 @@ import 'base_view.dart';
 import 'package:flutter/material.dart';
 
 class ChatList extends StatelessWidget {
-  final ChatType chat;
-
-  ChatList({Key key, this.chat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +14,7 @@ class ChatList extends StatelessWidget {
         model.pullChats();
       },
       builder: (context, model, child) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
         child: model.chats.length > 0 ?
           ListView.separated(
             separatorBuilder: (context, index) => Divider(),
