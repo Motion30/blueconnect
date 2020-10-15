@@ -1,5 +1,6 @@
 import 'package:blueconnectapp/core/constants/route_paths.dart';
 import 'package:blueconnectapp/core/enum/view_state.dart';
+import 'package:blueconnectapp/core/models/user.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/core/services/user_service.dart';
@@ -15,6 +16,8 @@ class HomeViewModel extends BaseModel{
   bool _searching = false;
 
   bool get isSearching => _searching;
+
+  List<AppUser> users = [];
 
   void startSearching(){
     _searching = true;
@@ -47,7 +50,17 @@ class HomeViewModel extends BaseModel{
 
    Future searchForUser ({ String username }) async {
       setState(ViewState.Busy);
-      await _userService.searchForUser(username: username);
+      var result = await _userService.searchForUser(username: username);
       setState(ViewState.Idle);
+
+      if(result is AppUser){
+        users.clear();
+        users.add(result);
+        notifyListeners();
+      }
+   }
+
+   void navigateToPersonalChat(){
+    _navigationService.navigatorKey.currentState.pushReplacementNamed('');
    }
 }

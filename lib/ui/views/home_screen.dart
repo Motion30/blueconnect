@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
-      onModelDisposed: (model){
+      onModelDisposed: (model) {
         _searchQuery.dispose();
       },
       onModelReady: (model) {
@@ -32,16 +32,18 @@ class _HomeScreenState extends State<HomeScreen>
       },
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          leading: model.isSearching? IconButton(
-            icon: Icon(
-              Icons.cancel,
-              color: KPrimaryWhite,
-            ),
-            onPressed: (){
-              // End searching
-              model.endSearching();
-            },
-          ): null,
+          leading: model.isSearching
+              ? IconButton(
+                  icon: Icon(
+                    Icons.cancel,
+                    color: KPrimaryWhite,
+                  ),
+                  onPressed: () {
+                    // End searching
+                    model.endSearching();
+                  },
+                )
+              : null,
           title: !model.isSearching
               ? Text(
                   "Blue Connect",
@@ -71,12 +73,13 @@ class _HomeScreenState extends State<HomeScreen>
                 splashRadius: 20,
                 onPressed: () {
                   // Open the search field if is searching is not enabled
-                  if(!model.isSearching) model.startSearching();
-                  if(_searchQuery.text.isNotEmpty) model.searchForUser(username: _searchQuery.text);
+                  if (!model.isSearching) model.startSearching();
+                  if (_searchQuery.text.isNotEmpty)
+                    model.searchForUser(username: _searchQuery.text);
+                  _searchQuery.clear();
                 },
                 icon: Icon(
-                  !model.isSearching ?
-                  Icons.search : Icons.send,
+                  !model.isSearching ? Icons.search : Icons.send,
                   color: KPrimaryWhite,
                 ),
               ),
@@ -154,108 +157,141 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ],
           backgroundColor: KPrimaryColor2,
-          bottom: !model.isSearching? TabBar(
-              controller: _tabController,
-              indicatorColor: KPrimaryWhite,
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
-                Tab(
-                  icon: Icon(
-                    Icons.public,
-                    color: KPrimaryWhite,
-                  ),
-                  child: Text(
-                    "Feeds",
-                    style: TextStyle(
-                        color: KPrimaryWhite,
-                        fontFamily: 'PoppinsRegular',
-                        fontSize: 13),
-                  ),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.chat,
-                    color: KPrimaryWhite,
-                  ),
-                  child: Text(
-                    "Chat",
-                    style: TextStyle(
-                        color: KPrimaryWhite,
-                        fontFamily: 'PoppinsRegular',
-                        fontSize: 13),
-                  ),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.people,
-                    color: KPrimaryWhite,
-                  ),
-                  child: Text(
-                    "Group",
-                    style: TextStyle(
-                        color: KPrimaryWhite,
-                        fontFamily: 'PoppinsRegular',
-                        fontSize: 13),
-                  ),
-                ),
-                Tab(
-                  icon: Icon(
-                    Icons.live_tv_rounded,
-                    color: KPrimaryWhite,
-                  ),
-                  child: Text(
-                    "Channel",
-                    style: TextStyle(
-                        color: KPrimaryWhite,
-                        fontFamily: 'PoppinsRegular',
-                        fontSize: 13),
-                  ),
-                )
-              ]) :  null,
+          bottom: !model.isSearching
+              ? TabBar(
+                  controller: _tabController,
+                  indicatorColor: KPrimaryWhite,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: [
+                      Tab(
+                        icon: Icon(
+                          Icons.public,
+                          color: KPrimaryWhite,
+                        ),
+                        child: Text(
+                          "Feeds",
+                          style: TextStyle(
+                              color: KPrimaryWhite,
+                              fontFamily: 'PoppinsRegular',
+                              fontSize: 13),
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.chat,
+                          color: KPrimaryWhite,
+                        ),
+                        child: Text(
+                          "Chat",
+                          style: TextStyle(
+                              color: KPrimaryWhite,
+                              fontFamily: 'PoppinsRegular',
+                              fontSize: 13),
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.people,
+                          color: KPrimaryWhite,
+                        ),
+                        child: Text(
+                          "Group",
+                          style: TextStyle(
+                              color: KPrimaryWhite,
+                              fontFamily: 'PoppinsRegular',
+                              fontSize: 13),
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.live_tv_rounded,
+                          color: KPrimaryWhite,
+                        ),
+                        child: Text(
+                          "Channel",
+                          style: TextStyle(
+                              color: KPrimaryWhite,
+                              fontFamily: 'PoppinsRegular',
+                              fontSize: 13),
+                        ),
+                      )
+                    ])
+              : null,
         ),
         body: Container(
-          height: model.state == ViewState.Busy ?  MediaQuery.of(context).size.height : null,
-          child: !model.isSearching?
-          TabBarView(
-            controller: _tabController,
-            children: [
-              FeedsList(),
-              ChatList(
-                chat: ChatType.Private,
-              ),
-              GroupList(),
-              ChannelList(),
-            ],
-          )
-          : model.state == ViewState.Busy?
-            Center(
-              child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(KPrimaryColor2),),
-            )
-          :ListView.separated(
-            itemBuilder: (context, index) => ListTile(
-              leading: CircleAvatar(
-                child: Text('A'),
-                foregroundColor: KSecondaryColorGrey,
-                backgroundColor: KPrimaryColor2,
-              ),
-              title: Text("User $index"),
-            ),
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: 5,
-          ),
+          height: model.state == ViewState.Busy
+              ? MediaQuery.of(context).size.height
+              : null,
+          child: !model.isSearching
+              ? TabBarView(
+                  controller: _tabController,
+                  children: [
+                    FeedsList(),
+                    ChatList(
+                      chat: ChatType.Private,
+                    ),
+                    GroupList(),
+                    ChannelList(),
+                  ],
+                )
+              : model.state == ViewState.Busy
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(KPrimaryColor2),
+                      ),
+                    )
+                  : ListView.separated(
+                      itemBuilder: (context, index) => ListTile(
+                        leading: CircleAvatar(
+                          child: Text(
+                            model.users[index].fullName
+                                .substring(0, 1)
+                                .toUpperCase(),
+                            style: TextStyle(
+                              fontFamily: 'PoppinsBold',
+                            ),
+                          ),
+                          foregroundColor: KSecondaryColorGrey,
+                          backgroundColor: KPrimaryColor2,
+                        ),
+                        title: Text(
+                          model.users[index].fullName,
+                          style: TextStyle(fontFamily: 'PoppinsBold'),
+                        ),
+                        trailing: IconButton(
+                          splashRadius: 30,
+                          splashColor: KPrimaryColor2.withOpacity(0.2),
+                          icon: Icon(
+                            Icons.message,
+                            color: KPrimaryColor2,
+                          ),
+                          onPressed: () {
+                            // open the personal chat screen
+                          },
+                        ),
+                        subtitle: Text(
+                          model.users[index].quote.isNotEmpty
+                              ? model.users[index].quote
+                              : 'User has no quote added',
+                          style: TextStyle(fontFamily: 'PoppinsRegular'),
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => Divider(),
+                      itemCount: model.users.length,
+                    ),
         ),
-        floatingActionButton: !model.isSearching?
-        FloatingActionButton(
-          backgroundColor: KPrimaryColor2,
-          onPressed: () {
-            model.navigateToCreateScreen();
-          },
-          child: Icon(
-            Icons.add,
-            color: KPrimaryWhite,
-          ),
-        )
-        : null,
+        floatingActionButton: !model.isSearching
+            ? FloatingActionButton(
+                backgroundColor: KPrimaryColor2,
+                onPressed: () {
+                  model.navigateToCreateScreen();
+                },
+                child: Icon(
+                  Icons.add,
+                  color: KPrimaryWhite,
+                ),
+              )
+            : null,
       ),
     );
   }

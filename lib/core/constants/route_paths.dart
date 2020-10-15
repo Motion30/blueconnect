@@ -14,4 +14,5 @@ class Routes {
   static const WEB_SCREEN = '/web-screen';
   static const CHAT_SCREEN = '/chat-screen';
   static const CHANNEL_SCREEN = '/channel-screen';
+  static const PERSONAL_CHAT_SCREEN = '/personal-chat-screen';
 }

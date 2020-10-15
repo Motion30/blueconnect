@@ -1,5 +1,6 @@
 import 'package:blueconnectapp/ui/views/add_screen.dart';
 import 'package:blueconnectapp/ui/views/channel_screen.dart';
+import 'package:blueconnectapp/ui/views/chat_screen.dart';
 import 'package:blueconnectapp/ui/views/conversation_screen.dart';
 import 'package:blueconnectapp/ui/views/create_screen.dart';
 import 'package:blueconnectapp/ui/views/forgotpassword_screen.dart';
@@ -70,6 +71,9 @@ class XRouter {
             channelIndex: arguments[2],
           ));
 
+      case Routes.PERSONAL_CHAT_SCREEN:
+          List<dynamic> arguments = settings.arguments;
+          return MaterialPageRoute(builder: (_) => ChatScreen());
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(
           body: Center(

@@ -34,7 +34,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
         // Pull the community chats
         model.pullChats();
       },
-      builder: (context, model, child) => Scaffold(
+      builder: (context, model, child) =>
+          Scaffold(
         appBar: AppBar(
           backgroundColor: KPrimaryColor2,
           leading: FlatButton(
