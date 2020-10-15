@@ -1,5 +1,6 @@
 import 'package:blueconnectapp/core/services/authentication_service.dart';
 import 'package:blueconnectapp/core/services/channel_service.dart';
+import 'package:blueconnectapp/core/services/chat_service.dart';
 import 'package:blueconnectapp/core/services/community_service.dart';
 import 'package:blueconnectapp/core/services/dialog_service.dart';
 import 'package:blueconnectapp/core/services/group_service.dart';
@@ -60,4 +61,5 @@ void setUpLocator(){
   locator.registerLazySingleton(() => ConversationViewModel());
   locator.registerLazySingleton(() => ChannelChatViewModel());
   locator.registerLazySingleton(() => ChatScreenViewModel());
+  locator.registerLazySingleton(() => ChatService());
 }

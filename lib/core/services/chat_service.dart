@@ -4,7 +4,7 @@ import 'package:blueconnectapp/core/models/chat.dart';
 import 'package:blueconnectapp/core/models/chat_block.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChannelService {
+class ChatService {
 
   final CollectionReference _chatCollection = FirebaseFirestore.instance.collection("chats");
 

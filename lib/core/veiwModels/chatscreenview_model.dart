@@ -1,5 +1,6 @@
 import 'package:blueconnectapp/core/models/chat.dart';
 import 'package:blueconnectapp/core/services/authentication_service.dart';
+import 'package:blueconnectapp/core/services/chat_service.dart';
 import 'package:blueconnectapp/core/services/navigator_service.dart';
 import 'package:blueconnectapp/locator.dart';
 
@@ -9,6 +10,7 @@ class ChatScreenViewModel extends BaseModel{
 
   NavigationService _navigationService = locator<NavigationService>();
   AuthenticationService _authenticationService = locator<AuthenticationService>();
+  ChatService _chatService = locator<ChatService>();
 
   List<Chat> chats = [];
 
@@ -30,11 +32,24 @@ class ChatScreenViewModel extends BaseModel{
   }
 
   void pullChats(){
-
+    _chatService.loadChats(chatId: _chatId).listen((chatData) {
+      List<Chat> updatedChats = chatData;
+      if(updatedChats != null  && updatedChats.length > 0){
+        chats = updatedChats;
+        notifyListeners();
+      }
+    });
   }
 
   Future sendMessage({ String message }) async {
-
+    await _chatService.messageFriend(
+        chat: Chat(
+              message: message,
+              sender: user,
+              timeSent: DateTime.now(),
+              isImage: false
+          ),
+        chatId: _chatId);
   }
 
 
