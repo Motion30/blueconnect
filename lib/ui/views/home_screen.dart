@@ -265,6 +265,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                           onPressed: () {
                             // open the personal chat screen
+                            model.navigateToChatScreen(username: model.users[index].fullName, imageSrc: '');
                           },
                         ),
                         subtitle: Text(

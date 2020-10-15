@@ -60,7 +60,7 @@ class HomeViewModel extends BaseModel{
       }
    }
 
-   void navigateToPersonalChat(){
-    _navigationService.navigatorKey.currentState.pushReplacementNamed('');
-   }
+  void navigateToChatScreen({ String username, String imageSrc }){
+    _navigationService.navigateTo(Routes.PERSONAL_CHAT_SCREEN, arguments: [username, imageSrc]);
+  }
 }

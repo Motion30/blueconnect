@@ -16,6 +16,8 @@ class ChatScreenViewModel extends BaseModel{
 
   String get user => _authenticationService.currentUser.id;
 
+  String get username => _authenticationService.currentUser.fullName;
+
   String _chatId = '';
 
   void navigateBack(){

@@ -24,6 +24,10 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseView<ChatScreenViewModel>(
+        onModelReady: (model){
+            model.setChatId(username: model.username, friend: widget.username);
+            model.pullChats();
+        },
         onModelDisposed: (model){
           _message.dispose();
         },
