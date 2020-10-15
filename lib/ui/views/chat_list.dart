@@ -22,14 +22,14 @@ class ChatList extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
                   leading: CircleAvatar(
                     backgroundColor: KPrimaryColor2,
-                    child: Text(model.chats[0].user1 == model.username
-                        ? model.chats[0].user2.substring(0,1).toUpperCase()
-                        : model.chats[0].user1.substring(0,1).toUpperCase()),
+                    child: Text(model.chats[index].user1 == model.username
+                        ? model.chats[index].user2.substring(0,1).toUpperCase()
+                        : model.chats[index].user1.substring(0,1).toUpperCase()),
                   ),
                   title: Text(
-                    model.chats[0].user1 == model.username
-                        ? model.chats[0].user2
-                        : model.chats[0].user1,
+                    model.chats[index].user1 == model.username
+                        ? model.chats[index].user2
+                        : model.chats[index].user1,
                     style: TextStyle(
                       fontFamily: 'PoppinsRegular',
                     ),
@@ -37,6 +37,13 @@ class ChatList extends StatelessWidget {
                   trailing: IconButton(
                     onPressed: () {
                       // Go to the chat screen
+                      model.navigateToChatScreen(
+                          userId: model.chats[index].users[0] == model.userId ? model.chats[index].users[1] : model.chats[index].users[0],
+                          username: model.chats[index].user1 == model.username
+                              ? model.chats[index].user2
+                              : model.chats[index].user1,
+                          imageSrc: '',
+                      );
                     },
                     icon: Icon(
                       Icons.message,

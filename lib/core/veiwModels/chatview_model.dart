@@ -17,6 +17,8 @@ class ChatViewModel extends BaseModel{
 
   String get username => _authenticationService.currentUser.fullName;
 
+  String get userId => _authenticationService.currentUser.id;
+
   void navigateBack(){
     _navigationService.goBack();
   }
