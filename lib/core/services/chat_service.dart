@@ -32,10 +32,8 @@ class ChatService {
             // Create the chat
            await _chatCollection.doc(chatId).set(chatSet.toJson());
         }
-        print('Entered here');
         return true;
     }catch(e){
-      print(e.toString());
       return e.message;
     }
   }
@@ -46,7 +44,6 @@ class ChatService {
       var chatData = await _chatCollection.doc(chatId).get();
       return chatData.data() != null && chatData.data().length > 0;
     }catch(e){
-      print(e.toString());
       return e.message;
     }
   }
