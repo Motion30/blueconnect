@@ -20,6 +20,8 @@ class ChannelChatViewModel extends BaseModel{
 
   String get user => _authenticationService.currentUser.id;
 
+  String get username =>  _authenticationService.currentUser.fullName;
+
   bool get isAdmin => _authenticationService.currentUser.id == _channelViewModel.channels[channelIndex].admin;
 
   // Navigate back
@@ -39,6 +41,7 @@ class ChannelChatViewModel extends BaseModel{
       var channelId = _channelViewModel.channels[channelIndex].id;
       await _channelService.addChannelChat(chat: Chat(
           message: message,
+          username: username,
           sender: _authenticationService.currentUser.id,
           timeSent: DateTime.now(),
           isImage: false

@@ -22,6 +22,8 @@ class ConversationViewModel extends BaseModel{
 
   String get user => _authenticationService.currentUser.id;
 
+  String get username => _authenticationService.currentUser.fullName;
+
   // Navigate back
   void navigateBack(){
     chats.clear();
@@ -40,6 +42,7 @@ class ConversationViewModel extends BaseModel{
       var communityId = _groupViewModel.combined[groupIndex].id;
       await _communityService.addCommunityChat(chat: Chat(
           message: message,
+          username: username,
           sender: _authenticationService.currentUser.id,
           timeSent: DateTime.now(),
           isImage: false
@@ -50,6 +53,7 @@ class ConversationViewModel extends BaseModel{
       var groupId = _groupViewModel.combined[groupIndex].id;
       await _groupService.addGroupChat(chat: Chat(
         message: message,
+        username: username,
         sender: _authenticationService.currentUser.id,
         timeSent: DateTime.now(),
         isImage: false,

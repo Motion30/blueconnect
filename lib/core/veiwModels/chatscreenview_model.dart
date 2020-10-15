@@ -68,6 +68,7 @@ class ChatScreenViewModel extends BaseModel{
         chat: Chat(
               message: message,
               sender: user,
+              username: username,
               timeSent: DateTime.now(),
               isImage: false
           ),
