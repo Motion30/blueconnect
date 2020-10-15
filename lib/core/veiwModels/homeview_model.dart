@@ -60,7 +60,7 @@ class HomeViewModel extends BaseModel{
       }
    }
 
-  void navigateToChatScreen({ String username, String imageSrc }){
-    _navigationService.navigateTo(Routes.PERSONAL_CHAT_SCREEN, arguments: [username, imageSrc]);
+  void navigateToChatScreen({ String username, String imageSrc, String userId }){
+    _navigationService.navigateTo(Routes.PERSONAL_CHAT_SCREEN, arguments: [username, imageSrc, userId ]);
   }
 }

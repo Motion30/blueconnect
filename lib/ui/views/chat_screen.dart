@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatefulWidget {
   final String username;
   final String imageSrc;
+  final String userId;
 
   const ChatScreen({
     Key key,
     @required this.username,
-    @required this.imageSrc
+    @required this.imageSrc,
+    @required this.userId
   }) : super(key: key);
 
   @override
@@ -25,7 +27,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return BaseView<ChatScreenViewModel>(
         onModelReady: (model){
-            model.setChatId(username: model.username, friend: widget.username);
+            model.setChatId(username: model.username, friend: widget.username, friendId: widget.userId);
+            model.setUpChat();
             model.pullChats();
         },
         onModelDisposed: (model){

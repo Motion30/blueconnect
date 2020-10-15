@@ -73,7 +73,7 @@ class XRouter {
 
       case Routes.PERSONAL_CHAT_SCREEN:
           List<dynamic> arguments = settings.arguments;
-          return MaterialPageRoute(builder: (_) => ChatScreen(username: arguments[0],imageSrc: arguments[1],));
+          return MaterialPageRoute(builder: (_) => ChatScreen(username: arguments[0], imageSrc: arguments[1], userId: arguments[2],));
 
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(
