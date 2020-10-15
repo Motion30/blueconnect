@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 class NewsService {
   static const String _apiKey = '4cc11890aafa421aa1b5f3d0017c2ebe';
 
-  static const String _url = 'http://newsapi.org/v2/top-headlines?country=us&apiKey=$_apiKey';
+  static const String _url = 'http://newsapi.org/v2/top-headlines?country=ng&apiKey=$_apiKey';
 
   // Fetch the news from the api
   Future getNews() async {
